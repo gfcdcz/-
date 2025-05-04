@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shen Dengke | 专业简历</title>
+    <style>
+        :root {
+            --apple-primary: #1d1d1f;
+            --apple-secondary: #2c2c2e;
+            --apple-accent: #2997ff; /* Apple Blue */
+            --apple-red: #ff3b30; /* Apple Red */
+            --apple-green: #34c759; /* Apple Green */
+            --apple-orange: #ff9500; /* Apple Orange */
+            --apple-purple: #af52de; /* Apple Purple for projects */
+            --apple-teal: #5ac8fa;  /* Apple Teal for internships */
+            --apple-yellow: #ffcc00; /* Apple Yellow for awards */
+            --apple-gray: #86868b;
+            --apple-light: #f5f5f7;
+            --highlight-color: #f7ff5e; /* Yellow highlight for GPA */
+            --keyword-highlight-color: rgba(255, 59, 48, 0.35); /* Red highlight for keywords */
+            --card-bg: rgba(44, 44, 46, 0.8);
+            --card-flipped-bg: rgba(58, 58, 60, 0.9);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --section-bg-alt: rgba(0, 0, 0, 0.1); /* Slightly lighter alternate background */
+            --separator-color: rgba(134, 134, 139, 0.3); /* Separator color */
+        }
+
+        @font-face {
+            font-family: "SF Pro Display";
+            src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff2');
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(155deg,
+                rgba(25,25,28,1) 0%,
+                rgba(30,30,33,1) 50%,
+                rgba(35,35,38,1) 100%);
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--apple-light);
+            overflow-y: scroll;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Utility Class for Animations --- */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+        .delay-5 { transition-delay: 0.5s; }
+        .delay-6 { transition-delay: 0.6s; } /* Added more delays */
+        .delay-7 { transition-delay: 0.7s; }
+        .delay-8 { transition-delay: 0.8s; }
+
+
+        /* --- Hero Section --- */
+        .hero-container {
+            height: 100vh; display: grid; grid-template-columns: 1fr auto;
+            align-items: center; gap: 5%; padding: 0 8%;
+            perspective: 1000px; position: relative; overflow: hidden;
+        }
+        .title-group { position: relative; overflow: visible; margin-left: 0; text-align: left; grid-column: 1 / 2; }
+        .hero-image-container {
+            grid-column: 2 / 3; display: flex; justify-content: center; align-items: center;
+            opacity: 0; transform: translateX(50px) scale(0.9);
+            animation: imageFadeIn 1.5s cubic-bezier(0.23, 1, 0.32, 1) 0.5s forwards;
+        }
+        .hero-photo {
+            width: clamp(180px, 25vw, 300px); height: auto; aspect-ratio: 1 / 1;
+            border-radius: 50%; object-fit: cover; border: 4px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        .gradient-text {
+            font-size: clamp(2.8rem, 7vw, 4.5rem); font-weight: 700; line-height: 1.15;
+            background: linear-gradient(92deg, rgba(245,245,247,1) 20%, rgba(168,168,173,1) 50%, rgba(245,245,247,1) 80%);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+            opacity: 0; transform: translateY(40px) rotateX(15deg);
+            animation: textReveal 1.8s cubic-bezier(0.23, 1, 0.32, 1) forwards; animation-delay: 0.2s;
+        }
+        .accent-text { color: var(--apple-accent); display: inline-block; position: relative; }
+        .red-accent-text {
+             color: var(--apple-red); font-weight: 600; position: relative; display: inline-block;
+             opacity: 0; transform: translateY(10px);
+             transition: opacity 0.6s ease-out 0.5s, transform 0.6s ease-out 0.5s;
+         }
+         .is-visible .red-accent-text { opacity: 1; transform: translateY(0); }
+        .degree-info { font-size: 0.65em; display: block; margin-top: 1.2em; line-height: 1.5; color: var(--apple-gray); }
+
+        /* --- Scroll Hint (Hero Section) --- */
+        .scroll-hint {
+            position: absolute; bottom: 5vh; right: 5%;
+            display: flex; flex-direction: column; align-items: center;
+            opacity: 0; animation: fadeIn 1s 2.5s forwards, hintBounce 2s infinite 3.5s;
+            z-index: 10;
+        }
+        .scroll-line {
+            width: 1px; height: 60px; margin-bottom: 16px;
+            background: linear-gradient(to bottom, rgba(134,134,139,0.8) 0%, rgba(134,134,139,0.4) 50%, rgba(134,134,139,0) 100%);
+        }
+        .scroll-text {
+            font-size: 0.85rem; letter-spacing: 0.05em;
+            color: var(--apple-gray);
+        }
+
+        /* --- Section Title Styling (Shared) --- */
+        .section-title {
+            font-size: clamp(2.2rem, 6vw, 3.2rem); font-weight: 600;
+            margin-bottom: 60px; color: var(--apple-light); text-align: center;
+        }
+
+        /* --- Section Separator --- */
+        .section-separator {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--separator-color), transparent);
+            margin: 100px auto 80px auto;
+            max-width: 80%;
+            border: none;
+        }
+
+        /* --- Education Section --- */
+        .education-container { padding: 80px 10% 80px; text-align: left; position: relative; min-height: 80vh; }
+        .education-item {
+            display: flex; align-items: flex-start; margin-bottom: 40px; padding: 25px;
+            background-color: var(--card-bg); border-radius: 18px; border: 1px solid var(--card-border);
+        }
+        .university-badge {
+            width: 55px; height: 55px; border-radius: 12px; margin-right: 25px; flex-shrink: 0;
+            background-color: rgba(245, 245, 247, 0.05); display: flex; justify-content: center;
+            align-items: center; overflow: hidden; margin-top: 5px;
+        }
+        .university-badge img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+        .education-info { flex-grow: 1; }
+        .education-degree { font-size: 1.5rem; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; flex-wrap: wrap; }
+        .education-degree .double-first-class-label { font-size: 0.7em; color: var(--apple-gray); margin-left: 10px; white-space: nowrap; }
+        .education-meta { color: var(--apple-gray); margin-bottom: 15px; font-size: 0.95rem; }
+        .education-meta span.major { color: var(--apple-accent); font-weight: 500; }
+        .education-details { line-height: 1.7; color: var(--apple-light); position: relative; font-size: 1rem; }
+        .education-details .highlight-container { display: inline; position: relative; white-space: nowrap; }
+        .education-details .highlight-animation { /* Yellow highlight */
+            position: absolute; left: -0.1em; right: -0.1em; bottom: -0.1em; height: 0.5em;
+            background-color: var(--highlight-color); opacity: 0.6; z-index: -1; border-radius: 3px; width: 0;
+            transition: width 1.2s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s;
+        }
+        .education-item.is-visible .highlight-animation { width: calc(100% + 0.2em); }
+
+        /* --- Achievements Section --- */
+        .achievements-container {
+            padding: 100px 10% 80px; text-align: center; background-color: var(--section-bg-alt);
+            overflow: hidden; position: relative; min-height: 80vh;
+        }
+        .achievement-content { display: grid; grid-template-columns: 1fr; gap: 40px; max-width: 900px; margin: 0 auto; align-items: center; }
+        .achievement-text { font-size: clamp(1.2rem, 2.5vw, 1.5rem); line-height: 1.7; color: var(--apple-light); max-width: 700px; margin: 0 auto; }
+        .achievement-image-placeholder {
+            width: 100%; max-width: 550px; aspect-ratio: 16 / 11; background-color: rgba(245, 245, 247, 0.08);
+            border: 2px dashed var(--apple-gray); border-radius: 18px; display: flex; justify-content: center;
+            align-items: center; flex-direction: column; color: var(--apple-gray); font-size: 1rem;
+            padding: 20px; box-sizing: border-box; margin: 0 auto;
+             opacity: 0; transform: translateY(30px) scale(0.95);
+             transition: opacity 0.8s ease-out 0.4s, transform 0.8s ease-out 0.4s;
+        }
+        .achievement-image-placeholder.is-visible { opacity: 1; transform: translateY(0) scale(1); }
+        .achievement-image-placeholder svg { width: 50px; height: 50px; margin-bottom: 15px; fill: var(--apple-gray); }
+
+        /* --- Skills & Certificates Section --- */
+        .skills-container { padding: 100px 10% 80px; position: relative; overflow: hidden; min-height: 70vh; }
+        .skills-grid { display: grid; grid-template-columns: 1fr; gap: 30px; max-width: 600px; margin: 0 auto; perspective: 1500px; }
+        .skill-item-wrapper { opacity: 0; transform: translateY(40px) scale(0.98); transition: opacity 0.7s ease-out, transform 0.7s ease-out; min-height: 250px; }
+        .skill-item-wrapper.is-visible { opacity: 1; transform: translateY(0) scale(1); }
+        .skill-item {
+            position: relative; width: 100%; min-height: 250px; border-radius: 20px;
+            transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+            cursor: pointer; border: 1px solid var(--card-border); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .skill-item.is-flipped { transform: rotateY(180deg); }
+        .skill-item-front, .skill-item-back {
+            position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden;
+            backface-visibility: hidden; border-radius: 20px; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; padding: 30px; box-sizing: border-box; text-align: center;
+        }
+        .skill-item-front { background-color: var(--card-bg); color: var(--apple-light); gap: 15px; }
+        .skill-item-back {
+            background-color: var(--card-flipped-bg); color: var(--apple-gray); transform: rotateY(180deg);
+            font-size: 1rem; background-size: contain; background-position: center; background-repeat: no-repeat;
+            display: flex; justify-content: center; align-items: center;
+        }
+         .skill-item-back::before { content: '证书图片占位符\A (Certificate Placeholder)'; white-space: pre; font-size: 0.9em; text-align: center; color: var(--apple-gray); }
+        .skill-icon { width: 50px; height: 50px; margin-bottom: 10px; }
+        .skill-icon svg { width: 100%; height: 100%; fill: var(--apple-light); }
+        .skill-item-wrapper.ielts .skill-icon svg { fill: var(--apple-accent); }
+        .skill-item-wrapper.accounting .skill-icon svg { fill: var(--apple-green); }
+        .skill-item-wrapper.cpa .skill-icon svg { fill: var(--apple-orange); }
+        .skill-title { font-size: 1.3rem; font-weight: 600; color: var(--apple-light); margin: 0; }
+        .skill-details { font-size: 0.95rem; color: var(--apple-gray); line-height: 1.5; margin: 0; }
+        .skill-details strong { color: var(--apple-light); font-weight: 500; }
+        .skill-hint { font-size: 0.75rem; color: var(--apple-gray); margin-top: 10px; position: absolute; bottom: 15px; left: 0; right: 0; text-align: center; }
+
+         /* --- Projects Section --- */
+        .projects-container { padding: 100px 10% 80px; position: relative; overflow: hidden; background-color: var(--section-bg-alt); }
+        .projects-list { display: grid; grid-template-columns: 1fr; gap: 50px; max-width: 900px; margin: 0 auto; }
+        .project-item {
+            background-color: var(--card-bg); border-radius: 20px; border: 1px solid var(--card-border);
+            padding: 35px; display: grid; grid-template-columns: 1fr auto;
+            gap: 30px; align-items: start;
+        }
+        .project-content { grid-column: 1 / 2; }
+        .project-results-area {
+             grid-column: 2 / 3; display: flex; flex-direction: column; gap: 15px;
+             justify-content: start; align-items: center;
+        }
+        .project-result-placeholder {
+            width: 120px; height: 85px; background-color: rgba(255, 255, 255, 0.05); border: 1px dashed var(--apple-gray);
+            border-radius: 10px; display: flex; justify-content: center; align-items: center;
+            font-size: 0.75rem; color: var(--apple-gray); text-align: center; padding: 10px; box-sizing: border-box;
+             opacity: 0; transform: translateX(20px); transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .project-item.is-visible .project-result-placeholder:nth-child(1) { transition-delay: 0.3s; opacity: 1; transform: translateX(0); }
+        .project-item.is-visible .project-result-placeholder:nth-child(2) { transition-delay: 0.45s; opacity: 1; transform: translateX(0); }
+        .project-title {
+            font-size: 1.6rem; font-weight: 600; color: var(--apple-light); margin-top: 0; margin-bottom: 10px;
+            display: flex; align-items: center; gap: 15px; flex-wrap: wrap;
+        }
+        .project-title .award-badge {
+             font-size: 0.7em; font-weight: 500; color: var(--apple-orange);
+             background-color: rgba(255, 149, 0, 0.1); padding: 3px 8px; border-radius: 8px; white-space: nowrap;
+        }
+         .project-title .award-badge.national-2 { color: var(--apple-red); background-color: rgba(255, 59, 48, 0.1); }
+         .project-title .award-badge.national-3 { color: var(--apple-purple); background-color: rgba(175, 82, 222, 0.1); }
+         .project-title .award-badge.regional-3 { color: var(--apple-green); background-color: rgba(52, 199, 89, 0.1); }
+        .project-subtitle { font-size: 0.9rem; color: var(--apple-gray); margin-bottom: 20px; display: block; }
+        .project-details p { font-size: 0.95rem; line-height: 1.7; color: var(--apple-light); margin-bottom: 15px; }
+        .project-details p strong { font-weight: 600; color: var(--apple-accent); }
+        .project-details p:last-child { margin-bottom: 0; }
+        .project-label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--apple-gray); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+        /* --- Internship Section --- */
+        .internship-container { padding: 100px 10% 80px; position: relative; overflow: hidden; }
+        .internship-list { display: grid; grid-template-columns: 1fr; gap: 50px; max-width: 900px; margin: 0 auto; }
+        .internship-card {
+            background-color: var(--card-bg); border-radius: 20px; border: 1px solid var(--card-border);
+            padding: 35px; position: relative; overflow: hidden;
+        }
+        .internship-header {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            margin-bottom: 20px; flex-wrap: wrap; gap: 10px;
+        }
+        .internship-company-role { flex-grow: 1; }
+        .internship-company { font-size: 1.6rem; font-weight: 600; color: var(--apple-light); margin-bottom: 3px; }
+        .internship-role { font-size: 1.1rem; font-weight: 500; color: var(--apple-teal); margin-bottom: 0; }
+        .internship-duration { font-size: 0.9rem; color: var(--apple-gray); text-align: right; white-space: nowrap; }
+        .internship-details ul { list-style: none; padding-left: 0; margin: 0 0 15px 0; }
+        .internship-details li {
+            font-size: 0.95rem; line-height: 1.7; color: var(--apple-light); margin-bottom: 12px;
+            padding-left: 25px; position: relative;
+        }
+        .internship-details li::before {
+            content: ''; background-color: var(--apple-teal); width: 8px; height: 8px; border-radius: 50%;
+            position: absolute; left: 5px; top: 0.5em; transform: translateY(-50%);
+        }
+        .internship-details strong { font-weight: 600; color: var(--apple-accent); }
+        .highlight-keyword { /* Red keyword highlight */
+            background-color: var(--keyword-highlight-color); padding: 0.1em 0.2em; border-radius: 3px;
+            box-decoration-break: clone; -webkit-box-decoration-break: clone;
+        }
+        .internship-takeaway {
+            margin-top: 20px; font-size: 0.9rem; font-style: italic; color: var(--apple-gray);
+            border-left: 3px solid var(--apple-teal); padding-left: 15px;
+        }
+
+        /* --- Awards Section (Revised Photo Wall) --- */
+        .awards-container {
+            padding: 100px 5% 80px;
+            position: relative;
+            overflow: hidden;
+            background-color: var(--section-bg-alt);
+        }
+        .awards-intro-text {
+            font-size: 1.1rem; color: var(--apple-light); text-align: center;
+            max-width: 700px; margin: 0 auto 50px auto; line-height: 1.6;
+        }
+        .awards-photo-grid { /* Changed from photo-wall */
+            display: grid;
+            /* Adjust columns for different screen sizes */
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 25px; /* Adjust gap */
+            max-width: 1000px; /* Adjust max width */
+            margin: 0 auto;
+            justify-items: center; /* Center items horizontally */
+        }
+        .award-photo-item { /* Styling for each photo/certificate */
+            width: 100%; /* Take full width of grid cell */
+            aspect-ratio: 3 / 4; /* Maintain aspect ratio */
+            background-color: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex; justify-content: center; align-items: center;
+            color: var(--apple-gray); font-size: 0.7rem; text-align: center;
+            padding: 10px; box-sizing: border-box; overflow: hidden;
+            /* Animation */
+            opacity: 0;
+            transform: scale(0.95); /* Start slightly scaled down */
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out, box-shadow 0.3s ease;
+        }
+        .award-photo-item img {
+             display: block; width: 100%; height: 100%; object-fit: cover;
+        }
+        .award-photo-item:hover {
+            transform: scale(1.03); /* Scale up slightly on hover */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+        .award-photo-item.is-visible {
+            opacity: 1;
+            transform: scale(1); /* Scale to normal size */
+        }
+
+
+        /* --- Portfolio Section --- */
+        .portfolio-container { padding: 80px 10%; text-align: center; background-color: var(--section-bg-alt); }
+        .portfolio-title { font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 600; color: var(--apple-light); margin-bottom: 30px; }
+        .portfolio-description { font-size: 1rem; color: var(--apple-gray); max-width: 600px; margin: 0 auto 40px auto; line-height: 1.6; }
+        .portfolio-button {
+            display: inline-block; background: linear-gradient(135deg, var(--apple-accent) 0%, var(--apple-purple) 100%);
+            color: var(--apple-light); padding: 15px 35px; border-radius: 30px; text-decoration: none;
+            font-weight: 500; font-size: 1rem; transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .portfolio-button:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 25px rgba(41, 151, 255, 0.4); }
+
+
+        /* --- Responsive Adjustments --- */
+         @media (max-width: 768px) {
+             .hero-container { grid-template-columns: 1fr; padding: 15vh 5% 5vh; height: auto; text-align: center; }
+             .title-group { grid-row: 1 / 2; margin-bottom: 40px; text-align: center; }
+             .hero-image-container { grid-row: 2 / 3; grid-column: 1 / 2; transform: translateX(0) scale(0.9); margin-bottom: 30px; }
+             .hero-photo { width: clamp(150px, 40vw, 200px); }
+             .gradient-text { font-size: clamp(2.2rem, 8vw, 3rem); }
+             .scroll-hint { bottom: 3vh; right: 3%; align-items: center; }
+
+             .section-separator { margin: 80px auto 60px auto; max-width: 90%; }
+
+             .section-title { font-size: clamp(1.8rem, 7vw, 2.5rem); margin-bottom: 40px; }
+
+             .education-container { padding: 50px 5% 60px; }
+             .education-item { flex-direction: column; align-items: flex-start; padding: 20px; border-radius: 15px; margin-bottom: 30px; transition-delay: 0.1s; }
+             .university-badge { margin-right: 0; margin-bottom: 15px; width: 50px; height: 50px; border-radius: 12px; }
+             .education-degree { font-size: 1.3rem; }
+             .education-degree .double-first-class-label { margin-left: 8px; }
+             .education-meta { font-size: 0.9rem; margin-bottom: 12px; }
+             .education-details { font-size: 0.95rem; line-height: 1.6; }
+             .education-details .highlight-animation { height: 0.45em; bottom: -0.05em; transition: width 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.4s; }
+
+             /* Achievements Section Mobile */
+              .achievements-container { padding: 60px 5% 50px; min-height: auto; }
+              .achievement-content { gap: 30px; }
+              .achievement-text { font-size: clamp(1.1rem, 3.5vw, 1.4rem); }
+              .achievement-image-placeholder { max-width: 100%; font-size: 0.9rem; }
+              .red-accent-text { transition-delay: 0.3s; }
+              .achievement-image-placeholder { transition-delay: 0.2s; }
+
+             /* Skills Section Mobile */
+             .skills-container { padding: 60px 5% 50px; }
+             .skills-grid { max-width: 90%; gap: 25px; perspective: none; }
+             .skill-item-wrapper, .skill-item { min-height: 220px; }
+             .skill-item-front, .skill-item-back { padding: 25px; }
+             .skill-title { font-size: 1.2rem; }
+             .skill-details { font-size: 0.9rem; }
+             .skill-icon { width: 45px; height: 45px; }
+             .skill-hint { font-size: 0.7rem; bottom: 10px; }
+
+             /* Projects Section Mobile */
+             .projects-container { padding: 60px 5% 50px; }
+             .projects-list { gap: 30px; }
+             .project-item { grid-template-columns: 1fr; padding: 25px; border-radius: 15px; }
+              .project-content { grid-row: 1 / 2; }
+              .project-results-area { grid-row: 2 / 3; grid-column: 1 / -1; flex-direction: row; justify-content: center; margin-top: 15px; }
+              .project-result-placeholder { width: 45%; height: 70px; font-size: 0.7rem; }
+             .project-title { font-size: 1.4rem; gap: 10px; flex-wrap: wrap; }
+             .project-title .award-badge { font-size: 0.65em; }
+             .project-subtitle { font-size: 0.85rem; margin-bottom: 15px; }
+             .project-details p { font-size: 0.9rem; }
+             .project-label { font-size: 0.75rem; }
+
+              /* Internship Section Mobile */
+              .internship-container { padding: 60px 5% 50px; }
+              .internship-list { gap: 40px; }
+              .internship-card { padding: 25px; border-radius: 15px; }
+              .internship-header { flex-direction: column; align-items: flex-start; gap: 5px; margin-bottom: 15px;}
+              .internship-duration { text-align: left; }
+              .internship-company { font-size: 1.4rem; }
+              .internship-role { font-size: 1rem; }
+              .internship-details li { font-size: 0.9rem; padding-left: 20px; }
+              .internship-details li::before { left: 3px; top: 0.45em; width: 6px; height: 6px; }
+              .internship-takeaway { font-size: 0.85rem; }
+
+              /* Awards Section Mobile */
+              .awards-container { padding: 60px 5% 50px; }
+              .awards-intro-text { font-size: 1rem; margin-bottom: 40px; }
+              .awards-photo-grid {
+                   grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); /* Adjust columns */
+                   gap: 15px; /* Adjust gap */
+               }
+               .award-photo-item {
+                   font-size: 0.65rem; /* Smaller text in placeholder */
+               }
+
+              /* Portfolio Section Mobile */
+              .portfolio-container { padding: 60px 5% 50px; }
+              .portfolio-title { font-size: clamp(1.5rem, 6vw, 2rem); }
+              .portfolio-description { font-size: 0.95rem; }
+              .portfolio-button { padding: 12px 30px; font-size: 0.95rem; }
+         }
+
+        /* --- Keyframe Animations --- */
+        @keyframes textReveal { to { opacity: 1; transform: translateY(0) rotateX(0); } }
+        @keyframes fadeIn { to { opacity: 1; } }
+        @keyframes imageFadeIn { to { opacity: 1; transform: translateX(0) scale(1); } }
+        @keyframes hintBounce { /* Bounce animation for scroll hint */
+             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+             40% { transform: translateY(-10px); }
+             60% { transform: translateY(-5px); }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="hero-container">
+        <div class="title-group">
+            <h1 class="gradient-text">
+                您好,<br>
+                我是<span class="accent-text">沈登科</span><br>
+                <span class="degree-info">
+                    西南财经大学 <span class="accent-text">会计专业硕士</span>
+                </span>
+            </h1>
+        </div>
+        <div class="hero-image-container">
+            <img src="一寸照.jpg" alt="Shen Dengke 个人照片" class="hero-photo">
+        </div>
+        <div class="scroll-hint">
+            <div class="scroll-line"></div>
+            <div class="scroll-text">向下滚动</div> </div>
+    </div>
+
+    <div class="education-container" id="education">
+        <h2 class="section-title animate-on-scroll">教育背景</h2>
+        <div class="education-item animate-on-scroll delay-1">
+            <div class="university-badge">
+                <img src="https://placehold.co/100x100/eeeeee/777777?text=SWUFE\nLogo" alt="西南财经大学 校徽">
+            </div>
+            <div class="education-info">
+                <h3 class="education-degree">硕士：西南财经大学 <span class="double-first-class-label">（双一流 211）</span></h3>
+                <p class="education-meta">2024.9 - 2026.6 | 专业：<span class="major">会计专硕</span></p>
+                <p class="education-details">
+                    绩点：4.11/5 <span class="highlight-container">绩点排名：前 2%<span class="highlight-animation"></span></span>
+                </p>
+            </div>
+        </div>
+        <div class="education-item animate-on-scroll delay-2">
+            <div class="university-badge">
+                 <img src="https://placehold.co/100x100/eeeeee/777777?text=ZZU\nLogo" alt="郑州大学 校徽">
+            </div>
+            <div class="education-info">
+                <h3 class="education-degree">本科：郑州大学 <span class="double-first-class-label">（双一流 211）</span></h3>
+                <p class="education-meta">2020.9 - 2024.7 | 专业：<span class="major">市场营销（辅修经济学学士学位）</span></p>
+                <p class="education-details">
+                     绩点：3.73/4 <span class="highlight-container">绩点排名：前 10%<span class="highlight-animation"></span></span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <hr class="section-separator"> <div class="achievements-container" id="achievements">
+         <h2 class="section-title animate-on-scroll">综合素质优异</h2>
+         <div class="achievement-content">
+             <p class="achievement-text animate-on-scroll delay-1">
+                 2022年以综测专业第一荣获 <span class="red-accent-text">国家奖学金</span>。
+             </p>
+             <div class="achievement-image-placeholder animate-on-scroll delay-2">
+                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-8 14H7v-2h4v2zm0-4H7v-2h4v2zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2zm2-2v10h-2V7c0-1.1-.9-2-2-2h-2V5h4c1.1 0 2 .9 2 2z"/></svg>
+                 <span>国家奖学金证书（占位符）</span>
+             </div>
+         </div>
+    </div>
+
+    <hr class="section-separator"> <div class="skills-container" id="skills">
+        <h2 class="section-title animate-on-scroll">技能证书</h2>
+        <div class="skills-grid">
+            <div class="skill-item-wrapper ielts animate-on-scroll delay-1">
+                <div class="skill-item" role="button" tabindex="0" aria-pressed="false" aria-label="雅思证书卡片，点击查看">
+                    <div class="skill-item-front">
+                        <div class="skill-icon"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H4.26zm.8 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.07c.96-1.66 2.49-2.93 4.33-3.56C8.8 6.55 8.34 7.75 8.01 9zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2s.07-1.34.16-2h4.68c.09.66.16 1.32.16 2s-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg> </div>
+                        <h3 class="skill-title">雅思 (IELTS)</h3>
+                        <p class="skill-details">总分: <strong>7.0</strong></p>
+                        <span class="skill-hint">点击查看</span>
+                    </div>
+                    <div class="skill-item-back"></div>
+                </div>
+            </div>
+            <div class="skill-item-wrapper accounting animate-on-scroll delay-2">
+                 <div class="skill-item" role="button" tabindex="0" aria-pressed="false" aria-label="初级会计资格证卡片，点击查看">
+                    <div class="skill-item-front">
+                        <div class="skill-icon"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg> </div>
+                        <h3 class="skill-title">初级会计资格证</h3>
+                        <p class="skill-details">已获得</p>
+                        <span class="skill-hint">点击查看</span>
+                    </div>
+                    <div class="skill-item-back"></div>
+                </div>
+            </div>
+            <div class="skill-item-wrapper cpa animate-on-scroll delay-3">
+                 <div class="skill-item" role="button" tabindex="0" aria-pressed="false" aria-label="注册会计师进度卡片，点击查看">
+                    <div class="skill-item-front">
+                        <div class="skill-icon"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg> </div>
+                        <h3 class="skill-title">注册会计师 (CPA)</h3>
+                        <p class="skill-details">已通过: <strong>经济法, 战略</strong></p>
+                        <span class="skill-hint">点击查看</span>
+                    </div>
+                    <div class="skill-item-back"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="section-separator"> <div class="projects-container" id="projects">
+        <h2 class="section-title animate-on-scroll">项目经历</h2>
+        <div class="projects-list">
+            <div class="project-item animate-on-scroll delay-1">
+                <div class="project-content">
+                    <h3 class="project-title">
+                        智能助眠空调产品设计
+                        <span class="award-badge national-2">国家级二等奖</span>
+                    </h3>
+                    <span class="project-subtitle">中国大学生服务外包创新创业大赛 | 企业命题类</span>
+                    <div class="project-details">
+                        <p><span class="project-label">项目概述</span>为海尔集团设计智能助眠空调，加入白噪音、香氛等提升产品市场竞争力，并给出建模方案。</p>
+                        <p><span class="project-label">核心贡献</span>作为<strong>项目负责人</strong>，负责市场分析、创意构思、项目盈利研究，并运用问卷调查、网络爬虫、文本分析等方法进行市场调查和可行性分析。</p>
+                        <p><span class="project-label">最终成果</span>项目方案获得赛事评审认可，荣获<strong>国家级二等奖</strong>，提升了个人市场研究、行业分析、数据分析及财务建模能力。</p>
+                    </div>
+                </div>
+                <div class="project-results-area">
+                    <div class="project-result-placeholder"><span>成果展示<br>占位符</span></div>
+                    <div class="project-result-placeholder"><span>获奖证书<br>占位符</span></div>
+                </div>
+            </div>
+            <div class="project-item animate-on-scroll delay-2">
+                <div class="project-content">
+                     <h3 class="project-title">
+                        碳交易模式创新
+                        <span class="award-badge national-3">国家级三等奖</span>
+                    </h3>
+                    <span class="project-subtitle">全国大学生能源经济学术创意大赛</span>
+                     <div class="project-details">
+                        <p><span class="project-label">项目概述</span>设计碳配额交易平台，结合绿色金融、社交电子商务等模式，打造创新型场外交易体系。</p>
+                        <p><span class="project-label">核心贡献</span>作为<strong>项目负责人</strong>负责行业研究 & 商业模式搭建，分析碳市场定价机制、碳资产交易模式、政策影响，提出优化 ESG 治理方案。</p>
+                        <p><span class="project-label">最终成果</span>项目方案荣获<strong>国家级三等奖</strong>，在项目中锻炼了能源经济、碳交易市场、可持续投资分析能力。</p>
+                    </div>
+                 </div>
+                 <div class="project-results-area">
+                    <div class="project-result-placeholder"><span>成果展示<br>占位符</span></div>
+                    <div class="project-result-placeholder"><span>获奖证书<br>占位符</span></div>
+                 </div>
+            </div>
+            <div class="project-item animate-on-scroll delay-3">
+                <div class="project-content">
+                     <h3 class="project-title">
+                        网络安全人才培养模式创新
+                        <span class="award-badge regional-3">中部赛区三等奖</span>
+                    </h3>
+                    <span class="project-subtitle">中国大学生服务外包创新创业大赛 | 企业命题类</span>
+                     <div class="project-details">
+                        <p><span class="project-label">项目概述</span>按照安恒集团的命题要求设计西湖论剑网络安全大会方案，团队以网络安全人才培养为切入点，围绕网络安全行业人才培养需求，提出校企合作带动人才挖掘、培养、监督等一系列环节，设计出一套完整的人才预备方案。</p>
+                        <p><span class="project-label">核心贡献</span>作为<strong>项目负责人</strong>带领团队调研网络安全行业发展趋势、政策环境及市场需求，并分析企业招聘痛点，完善项目商业化模式。</p>
+                        <p><span class="project-label">最终成果</span>项目获<strong>区域三等奖</strong>，其中一位评委的评语连用三个“十分值得肯定”，本人在项目中积极参与，提高了行业研究、市场分析、创新创业等能力。</p>
+                    </div>
+                </div>
+                <div class="project-results-area">
+                    <div class="project-result-placeholder"><span>成果展示<br>占位符</span></div>
+                    <div class="project-result-placeholder"><span>获奖证书<br>占位符</span></div>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="section-separator"> <div class="internship-container" id="internships">
+        <h2 class="section-title animate-on-scroll">实习经历</h2>
+        <div class="internship-list">
+            <div class="internship-card animate-on-scroll delay-1">
+                <div class="internship-header">
+                    <div class="internship-company-role">
+                        <h3 class="internship-company">招商证券股份有限公司</h3>
+                        <h4 class="internship-role">商业、社服组行研助理</h4>
+                    </div>
+                    <span class="internship-duration">2024.12 - 2025.3</span>
+                </div>
+                <div class="internship-details">
+                    <ul>
+                        <li><span class="highlight-keyword">深度报告</span>: 参与撰写九华旅游、长白山、蜜雪冰城海外、活力天汇、货拉拉、小菜园等深度报告的研究、撰写和修改工作，掌握分析公司发展历程、股权架构、财务模式、业务模式和行业趋势的方法，学习拆解GTV、GMV的逻辑框架并完成货拉拉、活力天汇等互联网企业运营数据拆解，分析客单价、抽用率等指标对公司财务的影响。</li>
+                        <li><strong>消费观点研究:</strong> 参与OTA、本地服务、餐饮、茶饮、酒店、人力资源等行业核心消费观点初稿制作，完善路演 PPT，搜集整理社服、商业、互联网企业数据，分析行业动态、AI赋能情况。</li>
+                        <li><strong>业绩点评:</strong> 及时撰写携程、Boss直聘等企业业绩点评 & 估值分析，解读财务指标、盈利能力及投资建议。</li>
+                        <li><strong>数据库更新 &数据分析:</strong> 负责交运、酒店行业数据库更新，独立分析春运数据及影响，使用 <span class="highlight-keyword">Python</span> 自动周度生成数据点评，减少重复性工作，提升工作效率。</li>
+                    </ul>
+                </div>
+                <p class="internship-takeaway">工作收获：掌握商社互联网行业研究方法，提高数据挖掘搜集（借助爬虫、AIGC、金融终端等工具）、财务分析、估值建模、商业模式以及行业分析等能力。</p>
+            </div>
+
+             <div class="internship-card animate-on-scroll delay-2">
+                 <div class="internship-header">
+                     <div class="internship-company-role">
+                         <h3 class="internship-company">容诚会计师事务所（特殊普通合伙）厦门分所</h3>
+                         <h4 class="internship-role">审计助理</h4>
+                     </div>
+                     <span class="internship-duration">2024.2 - 2024.4</span>
+                 </div>
+                 <div class="internship-details">
+                     <ul>
+                         <li><strong>实习内容:</strong> 参与某芯片供应商、手术机器人项目<span class="highlight-keyword">IPO审计</span>、某上市公司禽类业务<span class="highlight-keyword">年审</span>。</li>
+                         <li><strong>回函控制与地址核查:</strong> 负责回函统计录入和回函地址核查，填写回函差异解释表，使用 <span class="highlight-keyword">VBA</span> 简化回函统计操作，提升工作效率。</li>
+                         <li><strong>截止性测试 & 抽凭:</strong> 随机抽取凭证，核验账目记录的准确性和完整性，并检查是否存在跨期及调整情况。</li>
+                         <li><strong>银行流水检查:</strong> 查找银行流水并对比公司账目，确保交易真实性和资金流向准确。</li>
+                     </ul>
+                 </div>
+                 <p class="internship-takeaway">工作收获：熟悉 IPO 和年审审计流程，提升 Excel 数据处理能力，强化财务分析与异常识别能力。</p>
+             </div>
+         </div>
+     </div>
+
+     <hr class="section-separator"> <div class="awards-container" id="awards">
+         <h2 class="section-title animate-on-scroll">荣誉奖励</h2>
+         <p class="awards-intro-text animate-on-scroll delay-1">
+             荣获多项国家级、省级及校级荣誉与竞赛奖励。
+         </p>
+         <div class="awards-photo-grid"> <div class="award-photo-item animate-on-scroll delay-2"><span>证书/奖杯<br>占位符 1</span></div>
+             <div class="award-photo-item animate-on-scroll delay-3"><span>证书/奖杯<br>占位符 2</span></div>
+             <div class="award-photo-item animate-on-scroll delay-4"><span>证书/奖杯<br>占位符 3</span></div>
+             <div class="award-photo-item animate-on-scroll delay-5"><span>证书/奖杯<br>占位符 4</span></div>
+             <div class="award-photo-item animate-on-scroll delay-6"><span>证书/奖杯<br>占位符 5</span></div>
+             <div class="award-photo-item animate-on-scroll delay-7"><span>证书/奖杯<br>占位符 6</span></div>
+             <div class="award-photo-item animate-on-scroll delay-8"><span>证书/奖杯<br>占位符 7</span></div>
+             <div class="award-photo-item animate-on-scroll delay-1"><span>证书/奖杯<br>占位符 8</span></div>
+             </div>
+     </div>
+
+
+     <hr class="section-separator"> <div class="portfolio-container" id="portfolio">
+         <h2 class="portfolio-title animate-on-scroll">作品集</h2>
+         <p class="portfolio-description animate-on-scroll delay-1">
+             查看我的详细作品集，了解更多关于我的项目、分析和成果。
+         </p>
+         <a href="#" class="portfolio-button animate-on-scroll delay-2" target="_blank" rel="noopener noreferrer">
+             下载作品集 (PDF)
+         </a>
+     </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Intersection Observer for Animations ---
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 // Lower threshold for faster trigger
+            };
+
+            const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Removed transform logic for photo wall items
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+            // Observe wrappers and other elements, including new sections
+            const elementsToAnimate = document.querySelectorAll(
+                '.animate-on-scroll, .section-title, .education-item, .achievement-text, .achievement-image-placeholder, .skill-item-wrapper, .project-item, .project-result-placeholder, .internship-card, .award-photo-item, .awards-intro-text, .portfolio-title, .portfolio-description, .portfolio-button' // Updated observer targets
+            );
+            elementsToAnimate.forEach(el => {
+                 // Removed initial transform setting for photo wall items
+                 observer.observe(el);
+            });
+
+
+            // --- Skill Card Flip on Click ---
+            const skillItems = document.querySelectorAll('.skill-item');
+            skillItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const isFlipped = item.classList.toggle('is-flipped');
+                    item.setAttribute('aria-pressed', isFlipped);
+                });
+                item.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        const isFlipped = item.classList.toggle('is-flipped');
+                        item.setAttribute('aria-pressed', isFlipped);
+                    }
+                });
+            });
+
+        });
+    </script>
+
+</body>
+</html>
+
