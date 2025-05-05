@@ -278,7 +278,7 @@
             border-left: 3px solid var(--apple-teal); padding-left: 15px;
         }
 
-        /* --- Awards Section (Revised Photo Wall) --- */
+        /* --- Awards Section (Grid Photo Wall) --- */
         .awards-container {
             padding: 100px 5% 80px;
             position: relative;
@@ -292,9 +292,9 @@
         .awards-photo-grid { /* Changed from photo-wall */
             display: grid;
             /* Adjust columns for different screen sizes */
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Slightly larger min width */
             gap: 25px; /* Adjust gap */
-            max-width: 1000px; /* Adjust max width */
+            max-width: 1100px; /* Adjust max width */
             margin: 0 auto;
             justify-items: center; /* Center items horizontally */
         }
@@ -313,7 +313,7 @@
             transform: scale(0.95); /* Start slightly scaled down */
             transition: opacity 0.7s ease-out, transform 0.7s ease-out, box-shadow 0.3s ease;
         }
-        .award-photo-item img {
+        .award-photo-item img { /* Style for actual images if added */
              display: block; width: 100%; height: 100%; object-fit: cover;
         }
         .award-photo-item:hover {
@@ -409,7 +409,7 @@
               .awards-container { padding: 60px 5% 50px; }
               .awards-intro-text { font-size: 1rem; margin-bottom: 40px; }
               .awards-photo-grid {
-                   grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); /* Adjust columns */
+                   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Adjust columns */
                    gap: 15px; /* Adjust gap */
                }
                .award-photo-item {
@@ -447,7 +447,7 @@
             </h1>
         </div>
         <div class="hero-image-container">
-            <img src="一寸照.jpg" alt="Shen Dengke 个人照片" class="hero-photo">
+            <img src="https://www7.zzu.edu.cn/__local/5/DC/DB/31B41EC85C26C2110CFA07F4671_7A5DE459_894D7.png" alt="Shen Dengke 个人照片" class="hero-photo">
         </div>
         <div class="scroll-hint">
             <div class="scroll-line"></div>
@@ -458,7 +458,7 @@
         <h2 class="section-title animate-on-scroll">教育背景</h2>
         <div class="education-item animate-on-scroll delay-1">
             <div class="university-badge">
-                <img src="https://placehold.co/100x100/eeeeee/777777?text=SWUFE\nLogo" alt="西南财经大学 校徽">
+                <img src="https://www.swufe.edu.cn/images/ph_logo.jpg" alt="西南财经大学 校徽">
             </div>
             <div class="education-info">
                 <h3 class="education-degree">硕士：西南财经大学 <span class="double-first-class-label">（双一流 211）</span></h3>
@@ -470,7 +470,7 @@
         </div>
         <div class="education-item animate-on-scroll delay-2">
             <div class="university-badge">
-                 <img src="https://placehold.co/100x100/eeeeee/777777?text=ZZU\nLogo" alt="郑州大学 校徽">
+                 <img src="https://www.zzu.edu.cn/images/dhbanner/logo.png" alt="郑州大学 校徽">
             </div>
             <div class="education-info">
                 <h3 class="education-degree">本科：郑州大学 <span class="double-first-class-label">（双一流 211）</span></h3>
@@ -678,7 +678,6 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-visible');
-                        // Removed transform logic for photo wall items
                         observer.unobserve(entry.target);
                     }
                 });
@@ -691,7 +690,6 @@
                 '.animate-on-scroll, .section-title, .education-item, .achievement-text, .achievement-image-placeholder, .skill-item-wrapper, .project-item, .project-result-placeholder, .internship-card, .award-photo-item, .awards-intro-text, .portfolio-title, .portfolio-description, .portfolio-button' // Updated observer targets
             );
             elementsToAnimate.forEach(el => {
-                 // Removed initial transform setting for photo wall items
                  observer.observe(el);
             });
 
