@@ -24,7 +24,7 @@
             --highlight-project-nat2: rgba(255, 59, 48, 0.4); /* Red */
             --highlight-project-nat3: rgba(175, 82, 222, 0.4); /* Purple */
             --highlight-project-reg3: rgba(52, 199, 89, 0.4); /* Green */
-            --highlight-internship: rgba(90, 200, 250, 0.4); /* Teal */
+            --highlight-internship: rgba(90, 200, 250, 0.3); /* Teal, slightly more transparent */
             --highlight-strength-team: rgba(255, 45, 85, 0.4); /* Pink */
             --highlight-strength-data: rgba(255, 149, 0, 0.4); /* Orange */
             --highlight-strength-learn: rgba(52, 199, 89, 0.4); /* Green */
@@ -46,7 +46,7 @@
         }
 
         html {
-             scroll-padding-top: 60px; /* Offset for potential fixed header */
+             scroll-padding-top: 60px; /* 为可能的固定页眉预留偏移 */
         }
 
         body {
@@ -58,22 +58,22 @@
                 rgba(35,35,38,1) 100%);
             font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
             color: var(--apple-light);
-            overflow-y: scroll; /* Ensure vertical scrollbar is always present */
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+            overflow-y: scroll; /* 确保垂直滚动条始终存在 */
+            overflow-x: hidden; /* 隐藏水平滚动条 */
+            scroll-behavior: smooth; /* 平滑滚动效果 */
         }
 
-        /* --- Utility Class for Animations --- */
+        /* --- 动画工具类 --- */
         .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            opacity: 0; /* 初始不可见 */
+            transform: translateY(30px); /* 初始位置偏下 */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* 过渡效果 */
         }
         .animate-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
+            opacity: 1; /* 滚动到视口时可见 */
+            transform: translateY(0); /* 滚动到视口时回到原位 */
         }
-        /* Staggered Delays */
+        /* 动画延迟类 */
         .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; }
         .delay-3 { transition-delay: 0.3s; } .delay-4 { transition-delay: 0.4s; }
         .delay-5 { transition-delay: 0.5s; } .delay-6 { transition-delay: 0.6s; }
@@ -81,90 +81,100 @@
         .delay-9 { transition-delay: 0.9s; } .delay-10 { transition-delay: 1.0s; }
         .delay-11 { transition-delay: 1.1s; } .delay-12 { transition-delay: 1.2s; }
 
-        /* Card Hover Effect */
+        /* 卡片悬停缩放效果 */
         .hover-scale {
              transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         .hover-scale:hover {
-             transform: scale(1.03);
-             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-             z-index: 10; /* Bring hovered card to front */
+             transform: scale(1.03); /* 悬停时放大 */
+             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25); /* 悬停时增加阴影 */
+             z-index: 10; /* 确保悬停的卡片在最前面 */
         }
 
 
-        /* --- Hero Section --- */
+        /* --- 顶部主要区域 --- */
         .hero-container {
-            height: 100vh; display: grid; grid-template-columns: 1fr auto;
-            align-items: center; gap: 5%; padding: 0 8%;
-            perspective: 1000px; position: relative; overflow: hidden;
+            height: 100vh; /* 占满视口高度 */
+            display: grid; /* 网格布局 */
+            grid-template-columns: 1fr auto; /* 左侧文本，右侧图片 */
+            align-items: center; /* 垂直居中对齐 */
+            gap: 5%; /* 网格间隙 */
+            padding: 0 8%; /* 左右内边距 */
+            perspective: 1000px; /* 3D效果的透视距离 */
+            position: relative; /* 相对定位，用于子元素绝对定位 */
+            overflow: hidden; /* 隐藏溢出内容 */
         }
         .title-group { position: relative; overflow: visible; margin-left: 0; text-align: left; grid-column: 1 / 2; }
         .hero-image-container {
-            grid-column: 2 / 3; display: flex; justify-content: center; align-items: center;
-            opacity: 0; transform: translateX(50px) scale(0.9);
-            animation: imageFadeIn 1.5s cubic-bezier(0.23, 1, 0.32, 1) 0.5s forwards;
+            grid-column: 2 / 3; /* 图片在第二列 */
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; transform: translateX(50px) scale(0.9); /* 初始状态 */
+            animation: imageFadeIn 1.5s cubic-bezier(0.23, 1, 0.32, 1) 0.5s forwards; /* 入场动画 */
         }
         .hero-photo {
-            width: clamp(180px, 25vw, 300px); height: auto; aspect-ratio: 1 / 1;
-            border-radius: 50%; object-fit: cover; border: 4px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            width: clamp(180px, 25vw, 300px); /* 响应式宽度 */
+            height: auto; aspect-ratio: 1 / 1; /* 保持1:1宽高比 */
+            border-radius: 50%; /* 圆形图片 */
+            object-fit: cover; /* 图片裁剪方式 */
+            border: 4px solid rgba(255, 255, 255, 0.1); /* 边框 */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); /* 阴影 */
         }
         .gradient-text {
-            font-size: clamp(2.8rem, 7vw, 4.5rem); font-weight: 700; line-height: 1.15;
-            background: linear-gradient(92deg, rgba(245,245,247,1) 20%, rgba(168,168,173,1) 50%, rgba(245,245,247,1) 80%);
-            -webkit-background-clip: text; background-clip: text; color: transparent;
-            opacity: 0; transform: translateY(40px) rotateX(15deg);
-            animation: textReveal 1.8s cubic-bezier(0.23, 1, 0.32, 1) forwards; animation-delay: 0.2s;
+            font-size: clamp(2.8rem, 7vw, 4.5rem); /* 响应式字体大小 */
+            font-weight: 700; line-height: 1.15;
+            background: linear-gradient(92deg, rgba(245,245,247,1) 20%, rgba(168,168,173,1) 50%, rgba(245,245,247,1) 80%); /* 渐变背景 */
+            -webkit-background-clip: text; background-clip: text; color: transparent; /* 文字渐变效果 */
+            opacity: 0; transform: translateY(40px) rotateX(15deg); /* 初始状态 */
+            animation: textReveal 1.8s cubic-bezier(0.23, 1, 0.32, 1) forwards; animation-delay: 0.2s; /* 文字入场动画 */
         }
         .accent-text { color: var(--apple-accent); display: inline-block; position: relative; }
-        .red-accent-text {
+        .red-accent-text { /* 红色强调文本，例如国家奖学金 */
              color: var(--apple-red); font-weight: 600; position: relative; display: inline-block;
-             opacity: 0; transform: translateY(10px);
-             transition: opacity 0.6s ease-out 0.5s, transform 0.6s ease-out 0.5s;
-         }
-         .is-visible .red-accent-text { opacity: 1; transform: translateY(0); }
+             opacity: 0; transform: translateY(10px); /* 初始状态 */
+             transition: opacity 0.6s ease-out 0.5s, transform 0.6s ease-out 0.5s; /* 过渡效果 */
+        }
+         .is-visible .red-accent-text { opacity: 1; transform: translateY(0); } /* 可见时状态 */
         .degree-info { font-size: 0.65em; display: block; margin-top: 1.2em; line-height: 1.5; color: var(--apple-gray); }
 
-        /* --- Scroll Hint (Hero Section) --- */
+        /* --- 向下滚动提示 (顶部主要区域) --- */
         .scroll-hint {
-            position: absolute; bottom: 5vh; right: 5%;
+            position: absolute; bottom: 5vh; right: 5%; /* 定位 */
             display: flex; flex-direction: column; align-items: center;
-            opacity: 0; animation: fadeIn 1s 1.8s forwards, hintBounce 2s infinite 2.8s; /* Faster appearance */
+            opacity: 0; animation: fadeIn 1s 1.8s forwards, hintBounce 2s infinite 2.8s; /* 入场及弹跳动画 */
             z-index: 10;
         }
         .scroll-line {
             width: 1px; height: 60px; margin-bottom: 16px;
-            background: linear-gradient(to bottom, rgba(134,134,139,0.8) 0%, rgba(134,134,139,0.4) 50%, rgba(134,134,139,0) 100%);
+            background: linear-gradient(to bottom, rgba(134,134,139,0.8) 0%, rgba(134,134,139,0.4) 50%, rgba(134,134,139,0) 100%); /* 渐变线条 */
         }
         .scroll-text {
             font-size: 0.85rem; letter-spacing: 0.05em;
             color: var(--apple-gray); font-weight: 500;
         }
 
-        /* --- Section Title Styling (Shared) --- */
+        /* --- 区块标题样式 (通用) --- */
         .section-title {
             font-size: clamp(2.2rem, 6vw, 3.2rem); font-weight: 600;
             margin-bottom: 60px; color: var(--apple-light); text-align: center;
         }
 
-        /* --- Section Separator --- */
+        /* --- 区块分隔线 --- */
         .section-separator {
             height: 1px;
-            background: linear-gradient(to right, transparent, var(--separator-color), transparent);
-            margin: 100px auto 80px auto;
-            max-width: 80%;
+            background: linear-gradient(to right, transparent, var(--separator-color), transparent); /* 渐变分隔线 */
+            margin: 100px auto 80px auto; /* 上下外边距 */
+            max-width: 80%; /* 最大宽度 */
             border: none;
         }
 
-        /* --- Education Section --- */
-        .education-container { padding: 120px 10% 80px; /* Increased top padding */ text-align: left; position: relative; min-height: 80vh; }
+        /* --- 教育背景区块 --- */
+        .education-container { padding: 120px 10% 80px; text-align: left; position: relative; min-height: 80vh; }
         .education-item {
             display: flex; align-items: flex-start; margin-bottom: 40px; padding: 25px;
             background-color: var(--card-bg); border-radius: 18px; border: 1px solid var(--card-border);
-            /* No hover scale for education items */
         }
-        .university-badge {
-            width: 55px; height: 55px; border-radius: 12px; margin-right: 25px; flex-shrink: 0;
+        .university-badge { /* 大学徽标容器 */
+            width: 150px; height: 150px; border-radius: 15px; margin-right: 25px; flex-shrink: 0;
             background-color: rgba(245, 245, 247, 0.05); display: flex; justify-content: center;
             align-items: center; overflow: hidden; margin-top: 5px;
         }
@@ -176,68 +186,63 @@
         .education-meta span.major { color: var(--apple-accent); font-weight: 500; }
         .education-details { line-height: 1.7; color: var(--apple-light); position: relative; font-size: 1rem; }
         .education-details .highlight-container { display: inline; position: relative; white-space: nowrap; }
-        .education-details .highlight-animation { /* Yellow highlight */
+        .education-details .highlight-animation { /* GPA排名高亮动画 */
             position: absolute; left: -0.1em; right: -0.1em; bottom: -0.1em; height: 0.5em;
-            background-color: var(--highlight-color); opacity: 0.6; z-index: -1; border-radius: 3px; width: 0;
-            transition: width 1.2s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s;
+            background-color: var(--highlight-color); opacity: 0.6; z-index: -1; border-radius: 3px; width: 0; /* 初始宽度为0 */
+            transition: width 1.2s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s; /* 宽度变化动画 */
         }
-        .education-item.is-visible .highlight-animation { width: calc(100% + 0.2em); }
+        .education-item.is-visible .highlight-animation { width: calc(100% + 0.2em); } /* 可见时展开高亮 */
 
-        /* --- Achievements Section --- */
+        /* --- 综合素质/成就区块 --- */
         .achievements-container {
             padding: 100px 10% 80px; text-align: center; background-color: var(--section-bg-alt);
             overflow: hidden; position: relative; min-height: 80vh;
         }
         .achievement-content { display: grid; grid-template-columns: 1fr; gap: 40px; max-width: 900px; margin: 0 auto; align-items: center; }
         .achievement-text { font-size: clamp(1.2rem, 2.5vw, 1.5rem); line-height: 1.7; color: var(--apple-light); max-width: 700px; margin: 0 auto; }
-        .achievement-image-placeholder {
+        .achievement-image-placeholder { /* 奖学金证书图片容器 */
             width: 100%; max-width: 550px; aspect-ratio: 16 / 11; background-color: rgba(245, 245, 247, 0.08);
-            border: 1px solid var(--card-border); /* Changed from dashed */
+            border: 1px solid var(--card-border);
             border-radius: 18px; display: flex; justify-content: center;
             align-items: center; flex-direction: column; color: var(--apple-gray); font-size: 1rem;
-            padding: 0; /* Remove padding if using img */
-            box-sizing: border-box; margin: 0 auto; overflow: hidden; /* Hide image overflow */
-             opacity: 0; transform: translateY(30px) scale(0.95);
-             transition: opacity 0.8s ease-out 0.4s, transform 0.8s ease-out 0.4s;
+            padding: 0; box-sizing: border-box; margin: 0 auto; overflow: hidden;
+             opacity: 0; transform: translateY(30px) scale(0.95); /* 初始状态 */
+             transition: opacity 0.8s ease-out 0.4s, transform 0.8s ease-out 0.4s; /* 入场动画 */
         }
-        .achievement-image-placeholder img { /* Style for the image inside */
-             display: block;
-             width: 100%;
-             height: 100%;
-             object-fit: contain; /* Use contain to see the whole certificate */
+        .achievement-image-placeholder img {
+             display: block; width: 100%; height: 100%;
+             object-fit: contain; /* 确保整个证书可见 */
         }
-        .achievement-image-placeholder.is-visible { opacity: 1; transform: translateY(0) scale(1); }
+        .achievement-image-placeholder.is-visible { opacity: 1; transform: translateY(0) scale(1); } /* 可见时状态 */
 
-        /* --- Skills & Certificates Section --- */
+        /* --- 技能与证书区块 --- */
         .skills-container { padding: 100px 10% 80px; position: relative; overflow: hidden; min-height: 70vh; }
         .skills-grid { display: grid; grid-template-columns: 1fr; gap: 30px; max-width: 600px; margin: 0 auto; perspective: 1500px; }
         .skill-item-wrapper { opacity: 0; transform: translateY(40px) scale(0.98); transition: opacity 0.7s ease-out, transform 0.7s ease-out; min-height: 250px; }
         .skill-item-wrapper.is-visible { opacity: 1; transform: translateY(0) scale(1); }
-        .skill-item {
+        .skill-item { /* 可翻转的技能卡片 */
             position: relative; width: 100%; min-height: 250px; border-radius: 20px;
-            transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+            transform-style: preserve-3d; /* 开启3D变换 */
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); /* 翻转动画 */
             cursor: pointer; border: 1px solid var(--card-border); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
-        .skill-item.is-flipped { transform: rotateY(180deg); }
-        .skill-item-front, .skill-item-back {
+        .skill-item.is-flipped { transform: rotateY(180deg); } /* 翻转状态 */
+        .skill-item-front, .skill-item-back { /* 卡片正面与背面 */
             position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden;
-            backface-visibility: hidden; border-radius: 20px; display: flex; flex-direction: column;
+            backface-visibility: hidden; /* 隐藏背面 */
+            border-radius: 20px; display: flex; flex-direction: column;
             align-items: center; justify-content: center; padding: 30px; box-sizing: border-box; text-align: center;
         }
         .skill-item-front { background-color: var(--card-bg); color: var(--apple-light); gap: 15px; }
         .skill-item-back {
-            background-color: var(--card-flipped-bg); color: var(--apple-gray); transform: rotateY(180deg);
+            background-color: var(--card-flipped-bg); color: var(--apple-gray); transform: rotateY(180deg); /* 背面预先翻转 */
             display: flex; justify-content: center; align-items: center;
-            padding: 15px; /* Adjusted padding for the back */
-            overflow: hidden;
+            padding: 15px; overflow: hidden;
         }
-         .skill-item-back img { /* Style for the image on the back */
-             display: block;
-             max-width: 100%;
-             max-height: 100%;
-             object-fit: contain; /* Ensure the whole image is visible */
-             border-radius: 10px; /* Optional: round corners of image slightly */
-         }
+         .skill-item-back img {
+             display: block; max-width: 100%; max-height: 100%;
+             object-fit: contain; border-radius: 10px;
+        }
         .skill-icon {
             width: 50px; height: 50px; margin-bottom: 10px;
             display: flex; justify-content: center; align-items: center;
@@ -250,57 +255,40 @@
         .skill-details strong { color: var(--apple-light); font-weight: 500; }
         .skill-hint { font-size: 0.75rem; color: var(--apple-gray); margin-top: 10px; position: absolute; bottom: 15px; left: 0; right: 0; text-align: center; }
 
-         /* --- Projects Section --- */
+         /* --- 项目经历区块 --- */
         .projects-container { padding: 100px 10% 80px; position: relative; overflow: hidden; background-color: var(--section-bg-alt); }
         .projects-list { display: grid; grid-template-columns: 1fr; gap: 50px; max-width: 900px; margin: 0 auto; }
         .project-item {
             background-color: var(--card-bg); border-radius: 20px; border: 1px solid var(--card-border);
-            padding: 35px; display: grid; grid-template-columns: 1fr auto;
+            padding: 35px; display: grid; grid-template-columns: 1fr auto; /* 内容与图片/证书区域 */
             gap: 30px; align-items: start;
         }
         .project-content { grid-column: 1 / 2; }
-        .project-results-area { /* Container for results */
-             grid-column: 2 / 3;
-             display: flex;
-             flex-direction: column; /* Stack vertically */
-             gap: 15px;
-             justify-content: flex-start; /* Align to top */
-             align-items: center; /* Center horizontally */
+        .project-results-area { /* 项目成果图片/证书区域 */
+             grid-column: 2 / 3; display: flex; flex-direction: column;
+             gap: 15px; justify-content: flex-start; align-items: center;
         }
-        .project-result-image { /* Wrapper for image + caption */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-            width: 130px; /* Fixed width */
-            opacity: 0;
-            transform: translateX(20px);
-            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        .project-result-image { /* 单个成果图片容器 */
+            display: flex; flex-direction: column; align-items: center; gap: 5px;
+            width: 130px; opacity: 0; transform: translateX(20px); /* 初始状态 */
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out; /* 入场动画 */
         }
         .project-result-image img {
-            display: block;
-            width: 100%;
-            height: auto;
-            aspect-ratio: 16 / 10; /* Default aspect ratio (wide for visual) */
-            object-fit: contain;
-            border-radius: 8px;
-            border: 1px solid var(--card-border);
-            background-color: rgba(255, 255, 255, 0.05);
+            display: block; width: 100%; height: auto;
+            aspect-ratio: 16 / 10; /* 默认宽高比 */
+            object-fit: contain; border-radius: 8px;
+            border: 1px solid var(--card-border); background-color: rgba(255, 255, 255, 0.05);
         }
-        .project-result-image:nth-child(2) img { /* Second image (certificate) */
-             aspect-ratio: 3 / 4; /* Portrait for certificate */
-             object-fit: cover; /* Cover might look better for certificates */
+        .project-result-image:nth-child(2) img { /* 第二个图片（通常是证书）使用不同宽高比 */
+             aspect-ratio: 3 / 4; object-fit: cover;
         }
-        .project-result-image span { /* Caption style */
-            font-size: 0.7rem;
-            color: var(--apple-gray);
-            text-align: center;
+        .project-result-image span { /* 图片标题 */
+            font-size: 0.7rem; color: var(--apple-gray); text-align: center;
         }
-        /* Animation for result images */
-        .project-item.is-visible .project-result-image:nth-child(1) {
+        .project-item.is-visible .project-result-image:nth-child(1) { /* 成果图片动画 */
             transition-delay: 0.3s; opacity: 1; transform: translateX(0);
         }
-        .project-item.is-visible .project-result-image:nth-child(2) {
+        .project-item.is-visible .project-result-image:nth-child(2) { /* 证书图片动画 */
             transition-delay: 0.45s; opacity: 1; transform: translateX(0);
         }
 
@@ -308,9 +296,9 @@
             font-size: 1.6rem; font-weight: 600; color: var(--apple-light); margin-top: 0; margin-bottom: 10px;
             display: flex; align-items: center; gap: 15px; flex-wrap: wrap;
         }
-        .project-title .award-badge {
-             font-size: 0.7em; font-weight: 500; color: var(--apple-orange);
-             background-color: rgba(255, 149, 0, 0.1); padding: 3px 8px; border-radius: 8px; white-space: nowrap;
+        .project-title .award-badge { /* 奖项徽章 */
+             font-size: 0.7em; font-weight: 500;
+             padding: 3px 8px; border-radius: 8px; white-space: nowrap;
         }
          .project-title .award-badge.national-2 { color: var(--apple-red); background-color: rgba(255, 59, 48, 0.1); }
          .project-title .award-badge.national-3 { color: var(--apple-purple); background-color: rgba(175, 82, 222, 0.1); }
@@ -320,7 +308,7 @@
         .project-details p strong { font-weight: 600; color: var(--apple-accent); }
         .project-details p:last-child { margin-bottom: 0; }
         .project-label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--apple-gray); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.05em; }
-        .project-video-link { /* Bilibili Link Style */
+        .project-video-link { /* B站视频链接样式 */
             display: inline-flex; align-items: center; gap: 8px;
             margin-top: 20px; padding: 8px 15px;
             background-color: rgba(255, 255, 255, 0.1); color: var(--apple-light);
@@ -328,158 +316,172 @@
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
         .project-video-link:hover { background-color: rgba(255, 255, 255, 0.15); transform: translateY(-1px); }
-        .project-video-link svg { fill: #fb7299; /* Bilibili Pink */ }
+        .project-video-link svg { fill: #fb7299; /* B站粉色 */ }
 
 
-        /* --- Internship Section (Timeline Style) --- */
-        .internship-container { padding: 100px 10% 80px; position: relative; overflow: hidden; }
-        .internship-timeline { position: relative; max-width: 900px; margin: 0 auto; }
-        .internship-timeline::after {
-            content: ''; position: absolute; width: 3px; background-color: var(--timeline-color);
-            opacity: 0.3; top: 0; bottom: 0; left: 50%; margin-left: -1.5px; z-index: 1;
-        }
-        .timeline-item {
-            padding: 10px 40px; position: relative; background-color: inherit; width: 50%;
-            box-sizing: border-box; opacity: 0; transform: translateY(50px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-         .timeline-item.is-visible { opacity: 1; transform: translateY(0); }
-        .timeline-item::after {
-            content: ''; position: absolute; width: 18px; height: 18px; right: -9px;
-            background-color: var(--apple-secondary); border: 3px solid var(--timeline-color);
-            top: 25px; border-radius: 50%; z-index: 2; transition: background-color 0.3s ease;
-        }
-        .timeline-item.left { left: 0; padding-right: 20px; }
-        .timeline-item.right { left: 50%; padding-left: 20px; }
-        .timeline-item.right::after { left: -9px; }
-        .timeline-item:hover::after { background-color: var(--apple-teal); }
-        .timeline-content {
-            padding: 25px 30px; background-color: var(--card-bg); position: relative;
-            border-radius: 15px; border: 1px solid var(--card-border); box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-        }
-        .timeline-item.left .timeline-content { text-align: right; }
-        .timeline-item.right .timeline-content { text-align: left; }
-        .timeline-header { margin-bottom: 15px; }
-        .timeline-company { font-size: 1.4rem; font-weight: 600; color: var(--apple-light); margin: 0 0 3px 0; }
-        .timeline-role { font-size: 1rem; font-weight: 500; color: var(--apple-teal); margin: 0 0 5px 0; }
-        .timeline-duration { font-size: 0.85rem; color: var(--apple-gray); margin: 0; }
-        .timeline-details ul { list-style: none; padding: 0; margin: 0 0 15px 0; }
-        .timeline-details li {
-            font-size: 0.9rem; line-height: 1.6; color: var(--apple-light); margin-bottom: 10px;
-            text-align: left; /* Ensure list items are left-aligned */
-        }
-        .timeline-details strong { font-weight: 600; color: var(--apple-accent); }
-        .highlight-keyword { background-color: var(--keyword-highlight-color); padding: 0.1em 0.2em; border-radius: 3px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
-        .timeline-takeaway {
-            margin-top: 15px; font-size: 0.85rem; font-style: italic; color: var(--apple-gray);
-            border-left: 3px solid var(--apple-teal); padding-left: 10px; text-align: left;
-        }
-
-        /* --- Strengths Section --- */
-        .strengths-container {
-            padding: 100px 0 80px 0; /* Vertical padding, no horizontal */
+        /* --- 实习经历区块 (新设计：垂直卡片式时间轴) --- */
+        .internship-container {
+            padding: 100px 10% 80px;
             position: relative;
-            background-color: var(--apple-secondary); /* Dark background */
-            overflow: hidden; /* Hide scrollbar */
+            overflow: hidden;
         }
-        .strengths-header { /* Container for title and scroll hint */
-             display: flex;
-             justify-content: space-between;
-             align-items: center;
-             padding: 0 5%; /* Match wrapper padding */
-             margin: 0 auto 30px auto; /* Space below header */
-             max-width: calc(1100px + 10%); /* Match max-width + padding */
+        .internship-timeline { /* 作为卡片列表的容器 */
+            position: relative;
+            max-width: 800px; /* 卡片列表的最大宽度 */
+            margin: 0 auto; /* 居中显示 */
         }
-        .strengths-scroll-hint {
-             display: flex;
-             align-items: center;
-             gap: 8px;
-             font-size: 0.85rem;
-             color: var(--apple-gray);
-             opacity: 0;
-             animation: fadeIn 1s 1s forwards; /* Fade in after title */
-        }
-        .strengths-scroll-hint svg {
-             width: 20px;
-             height: 20px;
-             fill: var(--apple-gray);
-             animation: arrowScrollHorizontal 1.5s infinite 1.5s;
-        }
-        .strengths-nav-buttons { /* Container for buttons */
-            position: absolute;
-            top: 50%; /* Position vertically centered relative to the container */
-            left: 2%; /* Position from left */
-            right: 2%; /* Position from right */
-            transform: translateY(-50%); /* Adjust vertical centering */
-            display: flex;
-            justify-content: space-between;
-            pointer-events: none; /* Allow clicks to pass through */
-            z-index: 15; /* Above cards */
-        }
-        .strength-nav-button {
-            background-color: rgba(255, 255, 255, 0.15);
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            pointer-events: all; /* Enable clicks on buttons */
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            backdrop-filter: blur(5px);
-        }
-        .strength-nav-button:hover {
-            background-color: rgba(255, 255, 255, 0.25);
-            transform: scale(1.1);
-        }
-        .strength-nav-button svg {
-            width: 20px;
-            height: 20px;
-            fill: var(--apple-light);
-        }
-        .strength-nav-button.disabled { /* Style for disabled button */
-             opacity: 0.3;
-             cursor: default;
-             pointer-events: none;
-        }
-
-        .strengths-scroll-wrapper {
-            display: flex;
-            overflow-x: auto; /* Enable horizontal scroll */
-            overflow-y: hidden; /* Hide vertical scrollbar */
-            padding: 30px 5%; /* Padding inside the scroll area, match header */
-            gap: 25px; /* Gap between cards */
-            scroll-snap-type: x mandatory; /* Snap scrolling */
-            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-            scroll-behavior: smooth; /* Smooth scrolling for button clicks */
-            /* Hide scrollbar visually */
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none;  /* IE and Edge */
-        }
-        .strengths-scroll-wrapper::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera */
-        }
-        .strength-card {
-            flex: 0 0 auto; /* Prevent cards from shrinking/growing */
-            width: clamp(280px, 70vw, 350px); /* Responsive card width */
-            min-height: 350px; /* Adjusted height */
+        .timeline-item { /* 单个实习经历卡片 */
             background-color: var(--card-bg);
-            border-radius: 20px;
+            border-radius: 18px;
             border: 1px solid var(--card-border);
             padding: 30px;
-            box-sizing: border-box;
-            scroll-snap-align: center; /* Snap cards to center */
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            /* Animation */
+            position: relative;
+            margin-bottom: 40px; /* 卡片间距 */
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out, box-shadow 0.3s ease;
+            width: 100%; /* 卡片宽度占满容器 */
+            box-sizing: border-box;
+            text-align: left; /* 确保内容左对齐 */
         }
-        /* Apply distinct styles to cards */
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        .timeline-item.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .timeline-item::before { /* 时间轴圆点标记 */
+            content: '';
+            position: absolute;
+            left: -20px; /* 定位在卡片外部左侧 */
+            top: 35px;   /* 垂直对齐位置 */
+            width: 12px;
+            height: 12px;
+            background-color: var(--timeline-color);
+            border-radius: 50%;
+            border: 2px solid var(--apple-secondary); /* 圆点边框使其更突出 */
+            z-index: 2;
+        }
+        /* 移除 .timeline-content 的特定背景、边框等，因为 .timeline-item 已是卡片 */
+        .timeline-content {
+             padding: 0;
+             background-color: transparent;
+             border-radius: 0;
+             border: none;
+             box-shadow: none;
+        }
+        .timeline-header {
+            margin-bottom: 15px;
+        }
+        .timeline-company {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--apple-light);
+            margin: 0 0 3px 0;
+        }
+        .timeline-role {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--apple-teal);
+            margin: 0 0 8px 0;
+        }
+        .timeline-duration {
+            font-size: 0.85rem;
+            color: var(--apple-gray);
+            margin: 0 0 15px 0;
+        }
+        .timeline-details ul {
+            list-style: disc; /* 使用标准圆点列表 */
+            padding-left: 20px; /* 列表项缩进 */
+            margin: 0 0 15px 0;
+        }
+        .timeline-details li {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--apple-light);
+            margin-bottom: 10px;
+        }
+        .timeline-details li::marker { /* 自定义列表圆点颜色 */
+            color: var(--apple-teal);
+        }
+        .timeline-details strong {
+            font-weight: 600;
+            color: var(--apple-accent);
+        }
+        .highlight-keyword { /* 实习内容关键词高亮 */
+            background-color: var(--highlight-internship);
+            padding: 0.1em 0.3em;
+            border-radius: 4px;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+            color: var(--apple-primary); /* 高亮背景上的文字颜色，确保对比度 */
+            font-weight: 500;
+        }
+        .timeline-takeaway {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            font-style: normal; /* 移除斜体，保持一致性 */
+            color: var(--apple-gray);
+            border-left: 3px solid var(--apple-teal);
+            padding-left: 15px;
+        }
+
+
+        /* --- 个人优势区块 --- */
+        .strengths-container {
+            padding: 100px 0 80px 0; position: relative;
+            background-color: var(--apple-secondary); overflow: hidden;
+        }
+        .strengths-header { /* 优势区块头部，包含标题和滚动提示 */
+             display: flex; justify-content: space-between; align-items: center;
+             padding: 0 5%; margin: 0 auto 30px auto; max-width: calc(1100px + 10%);
+        }
+        .strengths-scroll-hint { /* 水平滚动提示 */
+             display: flex; align-items: center; gap: 8px;
+             font-size: 0.85rem; color: var(--apple-gray);
+             opacity: 0; animation: fadeIn 1s 1s forwards;
+        }
+        .strengths-scroll-hint svg {
+             width: 20px; height: 20px; fill: var(--apple-gray);
+             animation: arrowScrollHorizontal 1.5s infinite 1.5s; /* 箭头动画 */
+        }
+        .strengths-nav-buttons { /* 左右导航按钮容器 (桌面端) */
+            position: absolute; top: 50%; left: 2%; right: 2%;
+            transform: translateY(-50%); display: flex;
+            justify-content: space-between; pointer-events: none; z-index: 15;
+        }
+        .strength-nav-button { /* 单个导航按钮 */
+            background-color: rgba(255, 255, 255, 0.15); border: none; border-radius: 50%;
+            width: 40px; height: 40px; display: flex;
+            justify-content: center; align-items: center; cursor: pointer;
+            pointer-events: all; transition: background-color 0.3s ease, transform 0.2s ease;
+            backdrop-filter: blur(5px); /* 毛玻璃效果 */
+        }
+        .strength-nav-button:hover {
+            background-color: rgba(255, 255, 255, 0.25); transform: scale(1.1);
+        }
+        .strength-nav-button svg { width: 20px; height: 20px; fill: var(--apple-light); }
+        .strength-nav-button.disabled { opacity: 0.3; cursor: default; pointer-events: none; } /* 禁用状态 */
+
+        .strengths-scroll-wrapper { /* 水平滚动区域 */
+            display: flex; overflow-x: auto; overflow-y: hidden;
+            padding: 30px 5%; gap: 25px;
+            scroll-snap-type: x mandatory; /* 强制滚动捕捉 */
+            -webkit-overflow-scrolling: touch; scroll-behavior: smooth;
+            scrollbar-width: none; -ms-overflow-style: none; /* 隐藏滚动条 */
+        }
+        .strengths-scroll-wrapper::-webkit-scrollbar { display: none; } /* 隐藏滚动条 (Chrome, Safari) */
+        .strength-card { /* 单个优势卡片 */
+            flex: 0 0 auto; width: clamp(280px, 70vw, 350px); min-height: 350px;
+            background-color: var(--card-bg); border-radius: 20px;
+            border: 1px solid var(--card-border); padding: 30px;
+            box-sizing: border-box; scroll-snap-align: center; /* 滚动时居中对齐 */
+            display: flex; flex-direction: column; gap: 15px;
+            opacity: 0; transform: translateY(30px); /* 初始状态 */
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out; /* 入场动画 */
+        }
+        /* 不同优势卡片的左边框颜色 */
         .strength-card.teamwork { border-left: 5px solid var(--apple-pink); }
         .strength-card.data-analysis { border-left: 5px solid var(--apple-orange); }
         .strength-card.learning { border-left: 5px solid var(--apple-green); }
@@ -487,26 +489,18 @@
         .strength-card.ai { border-left: 5px solid var(--apple-yellow); }
         .strength-card.communication { border-left: 5px solid var(--apple-teal); }
 
-        .strength-card.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        /* Apply sequential delays based on card order */
+        .strength-card.is-visible { opacity: 1; transform: translateY(0); } /* 可见时状态 */
+        /* 卡片入场动画延迟 */
         .strength-card:nth-child(1) { transition-delay: 0.05s; }
         .strength-card:nth-child(2) { transition-delay: 0.1s; }
         .strength-card:nth-child(3) { transition-delay: 0.15s; }
         .strength-card:nth-child(4) { transition-delay: 0.2s; }
         .strength-card:nth-child(5) { transition-delay: 0.25s; }
-        .strength-card:nth-child(6) { transition-delay: 0.3s; } /* Added for communication */
+        .strength-card:nth-child(6) { transition-delay: 0.3s; }
 
 
-        .strength-icon {
-            width: 45px;
-            height: 45px;
-            margin-bottom: 10px;
-            /* Icon color will be set by specific card class */
-        }
-        /* Specific icon colors */
+        .strength-icon { width: 45px; height: 45px; margin-bottom: 10px; }
+        /* 不同优势卡片的图标颜色 */
         .strength-card.teamwork .strength-icon { fill: var(--apple-pink); }
         .strength-card.data-analysis .strength-icon { fill: var(--apple-orange); }
         .strength-card.learning .strength-icon { fill: var(--apple-green); }
@@ -514,42 +508,20 @@
         .strength-card.ai .strength-icon { fill: var(--apple-yellow); }
         .strength-card.communication .strength-icon { fill: var(--apple-teal); }
 
-        .strength-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--apple-light);
-            margin: 0;
-        }
-        /* Removed highlight swipe */
-
+        .strength-title { font-size: 1.4rem; font-weight: 600; color: var(--apple-light); margin: 0; }
         .strength-description {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: var(--apple-gray);
-            flex-grow: 1; /* Allow description to take remaining space */
+            font-size: 0.95rem; line-height: 1.6; color: var(--apple-gray);
+            flex-grow: 1; /* 使描述区域填满剩余空间 */
         }
-        .strength-description strong {
-            color: var(--apple-light);
-            font-weight: 500;
+        .strength-description strong { color: var(--apple-light); font-weight: 500; }
+        .strength-description .highlight-text { position: relative; display: inline; }
+        .strength-description .highlight-text::after { /* 优势描述中的关键词高亮动画 */
+            content: ''; position: absolute; left: -0.1em; bottom: -0.05em;
+            height: 0.5em; width: 0; /* 初始宽度为0 */
+            border-radius: 2px; z-index: -1;
+            transition: width 0.6s ease-out 0.5s; /* 宽度变化动画 */
         }
-        /* Keyword highlight within strength description */
-        .strength-description .highlight-text {
-            position: relative;
-            display: inline; /* Keep inline flow */
-        }
-        .strength-description .highlight-text::after {
-            content: '';
-            position: absolute;
-            left: -0.1em;
-            bottom: -0.05em;
-            height: 0.5em;
-            width: 0; /* Start with no width */
-            background-color: var(--highlight-color); /* Default highlight, override below */
-            border-radius: 2px;
-            z-index: -1;
-            transition: width 0.6s ease-out 0.5s; /* Animation */
-        }
-        /* Apply specific colors based on parent card */
+        /* 不同优势卡片的高亮颜色 */
         .strength-card.teamwork .highlight-text::after { background-color: var(--highlight-strength-team); }
         .strength-card.data-analysis .highlight-text::after { background-color: var(--highlight-strength-data); }
         .strength-card.learning .highlight-text::after { background-color: var(--highlight-strength-learn); }
@@ -557,13 +529,10 @@
         .strength-card.ai .highlight-text::after { background-color: var(--highlight-strength-ai); }
         .strength-card.communication .highlight-text::after { background-color: var(--highlight-strength-comm); }
 
-        /* Trigger highlight when card is visible */
-        .strength-card.is-visible .highlight-text::after {
-            width: calc(100% + 0.2em);
-        }
+        .strength-card.is-visible .highlight-text::after { width: calc(100% + 0.2em); } /* 可见时展开高亮 */
 
 
-        /* --- Awards Section (Grid Photo Wall) --- */
+        /* --- 荣誉奖励区块 (照片墙) --- */
         .awards-container {
             padding: 100px 5% 80px; position: relative; overflow: hidden; background-color: var(--section-bg-alt);
         }
@@ -571,75 +540,52 @@
             font-size: 1.1rem; color: var(--apple-light); text-align: center;
             max-width: 700px; margin: 0 auto 50px auto; line-height: 1.6;
         }
-        .awards-photo-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        .awards-photo-grid { /* 照片墙网格 */
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* 响应式列 */
             gap: 25px; max-width: 1100px; margin: 0 auto; justify-items: center;
         }
-        .award-photo-item {
-            width: 100%; aspect-ratio: 3 / 4; background-color: rgba(255, 255, 255, 0.06);
+        .award-photo-item { /* 单个证书照片项 */
+            width: 100%; aspect-ratio: 3 / 4; /* 宽高比 */
+            background-color: rgba(255, 255, 255, 0.06);
             border: 1px solid var(--card-border); border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             display: flex; justify-content: center; align-items: center; color: var(--apple-gray); font-size: 0.7rem;
             text-align: center; padding: 10px; box-sizing: border-box; overflow: hidden;
-            opacity: 0; transform: scale(0.95); transition: opacity 0.7s ease-out, transform 0.7s ease-out, box-shadow 0.3s ease;
+            opacity: 0; transform: scale(0.95); /* 初始状态 */
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out, box-shadow 0.3s ease; /* 入场与悬停动画 */
         }
         .award-photo-item img { display: block; width: 100%; height: 100%; object-fit: cover; }
         .award-photo-item:hover { transform: scale(1.03); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); z-index: 10; }
-        .award-photo-item.is-visible { opacity: 1; transform: scale(1); }
+        .award-photo-item.is-visible { opacity: 1; transform: scale(1); } /* 可见时状态 */
 
-        /* --- Personal Style Section --- */
+        /* --- 个人风采区块 --- */
         .personal-style-container {
-            padding: 100px 10% 80px;
-            position: relative;
-            overflow: hidden;
+            padding: 100px 10% 80px; position: relative; overflow: hidden;
         }
-        .style-grid { /* Changed class */
-             display: grid;
-             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-             gap: 40px;
-             max-width: 1200px;
-             margin: 0 auto;
+        .style-grid { /* 风采展示网格 */
+             display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 响应式列 */
+             gap: 40px; max-width: 1200px; margin: 0 auto;
         }
-        .style-item { /* Style for each item */
-             background-color: var(--card-bg);
-             border-radius: 20px;
-             overflow: hidden; /* Clip image corners */
-             border: 1px solid var(--card-border);
-        }
-        .style-image {
-            /* Removed fixed aspect ratio, let content define height */
-             border-radius: 0; /* Remove radius if inside card */
-             box-shadow: none; /* Remove shadow if inside card */
+        .style-item { /* 单个风采项目 */
+             background-color: var(--card-bg); border-radius: 20px;
+             overflow: hidden; border: 1px solid var(--card-border);
         }
         .style-image img {
-            display: block;
-            width: 100%;
-            height: 250px; /* Fixed height for images */
-            object-fit: cover;
+            display: block; width: 100%; height: 250px; /* 固定图片高度 */
+            object-fit: cover; /* 图片裁剪方式 */
         }
-        .style-text {
-             padding: 25px;
-             text-align: left; /* Default text align */
-        }
+        .style-text { padding: 25px; text-align: left; }
         .style-text h3 {
-            font-size: 1.5rem; /* Adjusted size */
-            font-weight: 600;
-            color: var(--apple-indigo); /* Use a different color */
-            margin-top: 0;
-            margin-bottom: 10px;
+            font-size: 1.5rem; font-weight: 600; color: var(--apple-indigo);
+            margin-top: 0; margin-bottom: 10px;
         }
-        .style-text p {
-            font-size: 0.95rem; /* Adjusted size */
-            line-height: 1.6;
-            color: var(--apple-light);
-            margin: 0;
-        }
+        .style-text p { font-size: 0.95rem; line-height: 1.6; color: var(--apple-light); margin: 0; }
 
 
-        /* --- Portfolio Section --- */
-        .portfolio-container { padding: 80px 10% 80px; text-align: center; background-color: var(--section-bg-alt); } /* Added more bottom padding */
+        /* --- 作品集区块 --- */
+        .portfolio-container { padding: 80px 10% 80px; text-align: center; background-color: var(--section-bg-alt); }
         .portfolio-title { font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 600; color: var(--apple-light); margin-bottom: 30px; }
         .portfolio-description { font-size: 1rem; color: var(--apple-gray); max-width: 600px; margin: 0 auto 40px auto; line-height: 1.6; }
-        .portfolio-button {
+        .portfolio-button { /* 下载按钮样式 */
             display: inline-block; background: linear-gradient(135deg, var(--apple-accent) 0%, var(--apple-purple) 100%);
             color: var(--apple-light); padding: 15px 35px; border-radius: 30px; text-decoration: none;
             font-weight: 500; font-size: 1rem; transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -647,83 +593,50 @@
         }
         .portfolio-button:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 25px rgba(41, 151, 255, 0.4); }
 
-        /* --- Contact Section --- */
+        /* --- 联系方式区块 --- */
         .contact-container {
-            padding: 60px 10% 80px; /* Adjust padding */
-            text-align: center;
-            background-color: var(--apple-secondary); /* Darker background */
+            padding: 60px 10% 80px; text-align: center;
+            background-color: var(--apple-secondary);
         }
         .contact-title {
-            font-size: clamp(1.5rem, 4vw, 2rem);
-            font-weight: 600;
-            color: var(--apple-light);
-            margin-bottom: 30px;
+            font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 600;
+            color: var(--apple-light); margin-bottom: 30px;
         }
         .contact-details {
-            display: flex;
-            justify-content: center;
-            gap: 30px; /* Space between items */
-            flex-wrap: wrap; /* Allow wrapping */
-            position: relative; /* For tooltip positioning */
+            display: flex; justify-content: center; gap: 30px;
+            flex-wrap: wrap; position: relative; /* 用于tooltip定位 */
         }
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1rem;
-            color: var(--apple-light);
-            cursor: pointer; /* Indicate clickable */
-            position: relative;
+        .contact-item { /* 单个联系方式 */
+            display: flex; align-items: center; gap: 10px;
+            font-size: 1rem; color: var(--apple-light);
+            cursor: pointer; position: relative; /* 用于tooltip定位 */
         }
         .contact-item svg {
-            width: 22px;
-            height: 22px;
-            fill: var(--apple-gray);
+            width: 22px; height: 22px; fill: var(--apple-gray);
             transition: fill 0.3s ease;
         }
-        .contact-item:hover svg {
-             fill: var(--apple-accent);
+        .contact-item:hover svg { fill: var(--apple-accent); }
+        .contact-item span { transition: color 0.3s ease; }
+         .contact-item:hover span { color: var(--apple-accent); }
+        .copy-tooltip { /* 复制提示框 */
+            position: absolute; bottom: 125%; left: 50%;
+            transform: translateX(-50%); background-color: var(--apple-primary);
+            color: var(--apple-light); padding: 5px 10px; border-radius: 5px;
+            font-size: 0.8rem; white-space: nowrap;
+            opacity: 0; visibility: hidden; /* 初始隐藏 */
+            transition: opacity 0.3s ease, visibility 0.3s ease; z-index: 20;
         }
-        .contact-item span { /* Style for the text part */
-            transition: color 0.3s ease;
-        }
-         .contact-item:hover span {
-             color: var(--apple-accent);
-         }
-        .copy-tooltip { /* Tooltip style */
-            position: absolute;
-            bottom: 125%; /* Position above the item */
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--apple-primary);
-            color: var(--apple-light);
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            white-space: nowrap;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            z-index: 20;
-        }
-        .copy-tooltip.visible {
-            opacity: 1;
-            visibility: visible;
-        }
+        .copy-tooltip.visible { opacity: 1; visibility: visible; } /* 可见状态 */
 
-        .disclaimer {
-            margin-top: 50px;
-            font-size: 0.75rem;
-            color: var(--apple-gray);
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.5;
+        .disclaimer { /* 免责声明 */
+            margin-top: 50px; font-size: 0.75rem; color: var(--apple-gray);
+            max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.5;
         }
 
 
-        /* --- Responsive Adjustments --- */
+        /* --- 响应式调整 (针对小屏幕/手机端) --- */
          @media (max-width: 768px) {
+             /* 顶部主要区域响应式 */
              .hero-container { grid-template-columns: 1fr; padding: 15vh 5% 5vh; height: auto; text-align: center; }
              .title-group { grid-row: 1 / 2; margin-bottom: 40px; text-align: center; }
              .hero-image-container { grid-row: 2 / 3; grid-column: 1 / 2; transform: translateX(0) scale(0.9); margin-bottom: 30px; }
@@ -732,10 +645,10 @@
              .scroll-hint { bottom: 3vh; right: 3%; align-items: center; }
 
              .section-separator { margin: 80px auto 60px auto; max-width: 90%; }
-
              .section-title { font-size: clamp(1.8rem, 7vw, 2.5rem); margin-bottom: 40px; }
 
-             .education-container { padding: 80px 5% 60px; /* Adjusted top padding */ }
+             /* 教育背景响应式 */
+             .education-container { padding: 80px 5% 60px; }
              .education-item { flex-direction: column; align-items: flex-start; padding: 20px; border-radius: 15px; margin-bottom: 30px; transition-delay: 0.1s; }
              .university-badge { margin-right: 0; margin-bottom: 15px; width: 50px; height: 50px; border-radius: 12px; }
              .education-degree { font-size: 1.3rem; }
@@ -744,7 +657,7 @@
              .education-details { font-size: 0.95rem; line-height: 1.6; }
              .education-details .highlight-animation { height: 0.45em; bottom: -0.05em; transition: width 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.4s; }
 
-             /* Achievements Section Mobile */
+             /* 综合素质/成就响应式 */
               .achievements-container { padding: 60px 5% 50px; min-height: auto; }
               .achievement-content { gap: 30px; }
               .achievement-text { font-size: clamp(1.1rem, 3.5vw, 1.4rem); }
@@ -752,24 +665,24 @@
               .red-accent-text { transition-delay: 0.3s; }
               .achievement-image-placeholder { transition-delay: 0.2s; }
 
-             /* Skills Section Mobile */
+             /* 技能证书响应式 */
              .skills-container { padding: 60px 5% 50px; }
-             .skills-grid { max-width: 90%; gap: 25px; perspective: none; }
+             .skills-grid { max-width: 90%; gap: 25px; perspective: none; } /* 移除3D透视以简化 */
              .skill-item-wrapper, .skill-item { min-height: 220px; }
-             .skill-item-front, .skill-item-back { padding: 25px; } /* Keep padding for front */
-             .skill-item-back { padding: 10px; } /* Adjust back padding */
+             .skill-item-front, .skill-item-back { padding: 25px; }
+             .skill-item-back { padding: 10px; }
              .skill-title { font-size: 1.2rem; }
              .skill-details { font-size: 0.9rem; }
              .skill-icon { width: 45px; height: 45px; }
              .skill-hint { font-size: 0.7rem; bottom: 10px; }
 
-             /* Projects Section Mobile */
+             /* 项目经历响应式 */
              .projects-container { padding: 60px 5% 50px; }
              .projects-list { gap: 30px; }
-             .project-item { grid-template-columns: 1fr; padding: 25px; border-radius: 15px; }
+             .project-item { grid-template-columns: 1fr; padding: 25px; border-radius: 15px; } /* 单列布局 */
               .project-content { grid-row: 1 / 2; }
-              .project-results-area { grid-row: 2 / 3; grid-column: 1 / -1; flex-direction: row; justify-content: center; margin-top: 15px; }
-              .project-result-image { width: 45%; max-width: 120px; } /* Adjust image wrapper size */
+              .project-results-area { grid-row: 2 / 3; grid-column: 1 / -1; flex-direction: row; justify-content: center; margin-top: 15px; } /* 图片/证书并排显示 */
+              .project-result-image { width: 45%; max-width: 120px; }
               .project-result-image span { font-size: 0.65rem; }
              .project-title { font-size: 1.4rem; gap: 10px; flex-wrap: wrap; }
              .project-title .award-badge { font-size: 0.65em; }
@@ -778,78 +691,83 @@
              .project-label { font-size: 0.75rem; }
               .project-video-link { margin-top: 15px; padding: 7px 12px; font-size: 0.8rem; }
 
-            .internship-container { padding: 60px 5% 50px; }
-            .internship-timeline::after { left: 15px; margin-left: 0; }
-            .timeline-item { width: 100%; padding: 15px 15px 15px 40px; margin-bottom: 25px; }
-            .timeline-item:last-child { margin-bottom: 0; }
-            .timeline-item.left, .timeline-item.right { left: 0; }
-            .timeline-item::after { left: 6px; top: 30px; }
-            .timeline-item.left .timeline-content, .timeline-item.right .timeline-content { text-align: left; }
-            .timeline-item .timeline-content { padding: 20px; border-radius: 12px; }
+            /* 实习经历响应式 (新设计) */
+            .internship-container {
+                padding: 60px 5% 50px;
+            }
+            .internship-timeline {
+                max-width: 100%; /* 卡片列表在手机端占满宽度 */
+            }
+            .timeline-item {
+                padding: 25px; /* 调整手机端卡片内边距 */
+                margin-bottom: 30px;
+            }
+            .timeline-item::before { /* 手机端圆点标记位置调整 */
+                left: -10px; /* 定位在卡片左侧内边距区域内 */
+                top: 30px;   /* 确保与内容对齐 */
+            }
             .timeline-company { font-size: 1.3rem; }
             .timeline-role { font-size: 0.95rem; }
             .timeline-duration { font-size: 0.8rem; }
-            .timeline-details li { font-size: 0.85rem; }
-            .timeline-takeaway { font-size: 0.8rem; }
-              
+            .timeline-details li { font-size: 0.85rem; line-height: 1.6; }
+            .timeline-details ul { padding-left: 18px; } /* 调整列表缩进 */
+            .timeline-takeaway { font-size: 0.85rem; padding-left: 12px; }
 
-              /* Strengths Section Mobile */
+
+              /* 个人优势响应式 */
               .strengths-container { padding: 60px 0 50px 0; }
               .strengths-header { padding: 0 5%; margin-bottom: 20px; }
               .strengths-scroll-wrapper { padding: 20px 5%; gap: 20px; }
-              .strength-card { width: clamp(250px, 80vw, 300px); min-height: 320px; padding: 25px; } /* Adjusted min-height */
+              .strength-card { width: clamp(250px, 80vw, 300px); min-height: 320px; padding: 25px; }
               .strength-title { font-size: 1.3rem; }
               .strength-description { font-size: 0.9rem; }
               .strengths-scroll-hint { font-size: 0.8rem; }
               .strengths-scroll-hint svg { width: 18px; height: 18px; }
-              .strengths-nav-buttons { display: none; /* Hide buttons on mobile, rely on swipe */ }
+              .strengths-nav-buttons { display: none; /* 手机端隐藏导航按钮，依赖滑动 */ }
 
-              /* Awards Section Mobile */
+              /* 荣誉奖励响应式 */
               .awards-container { padding: 60px 5% 50px; }
               .awards-intro-text { font-size: 1rem; margin-bottom: 40px; }
               .awards-photo-grid {
-                   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Adjust columns */
-                   gap: 15px; /* Adjust gap */
-               }
-               .award-photo-item {
-                   font-size: 0.65rem; /* Smaller text in placeholder */
-               }
+                   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* 调整列数和最小宽度 */
+                   gap: 15px; /* 调整间隙 */
+              }
+               .award-photo-item { font-size: 0.65rem; }
 
-               /* Personal Style Section Mobile */
+               /* 个人风采响应式 */
                .personal-style-container { padding: 60px 5% 50px; }
-               .style-grid { grid-template-columns: 1fr; gap: 30px; } /* Stack items */
+               .style-grid { grid-template-columns: 1fr; gap: 30px; } /* 单列堆叠 */
                .style-item { margin-bottom: 40px; }
-               /* Ensure consistent order */
                .style-item:nth-child(even) .style-image,
                .style-item:nth-child(odd) .style-image { grid-column: 1 / -1; grid-row: 1 / 2; }
                .style-item:nth-child(even) .style-text,
-               .style-item:nth-child(odd) .style-text { grid-column: 1 / -1; grid-row: 2 / 3; text-align: left; } /* Always left align text */
+               .style-item:nth-child(odd) .style-text { grid-column: 1 / -1; grid-row: 2 / 3; text-align: left; }
                .style-text h3 { font-size: 1.5rem; }
                .style-text p { font-size: 0.95rem; }
 
-              /* Portfolio Section Mobile */
+              /* 作品集响应式 */
               .portfolio-container { padding: 60px 5% 50px; }
               .portfolio-title { font-size: clamp(1.5rem, 6vw, 2rem); }
               .portfolio-description { font-size: 0.95rem; }
               .portfolio-button { padding: 12px 30px; font-size: 0.95rem; }
 
-               /* Contact Section Mobile */
+               /* 联系方式响应式 */
                .contact-container { padding: 50px 5% 60px; }
                .contact-title { font-size: clamp(1.3rem, 5vw, 1.8rem); margin-bottom: 25px; }
-               .contact-details { flex-direction: column; gap: 15px; align-items: center; }
+               .contact-details { flex-direction: column; gap: 15px; align-items: center; } /* 垂直排列 */
                .contact-item { font-size: 0.95rem; }
-         }
+        }
 
-        /* --- Keyframe Animations --- */
-        @keyframes textReveal { to { opacity: 1; transform: translateY(0) rotateX(0); } }
-        @keyframes fadeIn { to { opacity: 1; } }
-        @keyframes imageFadeIn { to { opacity: 1; transform: translateX(0) scale(1); } }
-        @keyframes hintBounce { /* Bounce animation for scroll hint */
+        /* --- CSS关键帧动画 --- */
+        @keyframes textReveal { to { opacity: 1; transform: translateY(0) rotateX(0); } } /* 文字入场 */
+        @keyframes fadeIn { to { opacity: 1; } } /* 淡入 */
+        @keyframes imageFadeIn { to { opacity: 1; transform: translateX(0) scale(1); } } /* 图片入场 */
+        @keyframes hintBounce { /* 向下滚动提示图标弹跳动画 */
              0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
              40% { transform: translateY(-10px); }
              60% { transform: translateY(-5px); }
         }
-        @keyframes arrowScrollHorizontal { /* Animation for horizontal scroll arrow */
+        @keyframes arrowScrollHorizontal { /* 水平滚动提示箭头动画 */
              0%, 100% { transform: translateX(0); }
              50% { transform: translateX(5px); }
         }
@@ -872,14 +790,15 @@
         </div>
         <div class="scroll-hint">
             <div class="scroll-line"></div>
-            <div class="scroll-text">向下滚动</div> </div>
+            <div class="scroll-text">向下滚动</div>
+        </div>
     </div>
 
     <div class="education-container" id="education">
         <h2 class="section-title animate-on-scroll">教育背景</h2>
         <div class="education-item animate-on-scroll delay-1">
             <div class="university-badge">
-                <img src="https://www.swufe.edu.cn/images/ph_logo.jpg" alt="西南财经大学 校徽">
+                <img src="https://myresume-sdk.oss-cn-chengdu.aliyuncs.com/%E8%A5%BF%E8%B4%A2.png?Expires=1746586541&OSSAccessKeyId=TMP.3Kna9cwcGYsLQ49Cpzt2RV8EZr1bSEhZvPF8cUAHP9WCcadBycw4VVT7uU4KRj8wp5q3osjxaAfiD6PFBnp2xdY8kz3pQx&Signature=RvG2Z2ijAO4%2BHv9fj6jTBNFpF6s%3D" alt="西南财经大学 校徽">
             </div>
             <div class="education-info">
                 <h3 class="education-degree">硕士：西南财经大学 <span class="double-first-class-label">（双一流 211）</span></h3>
@@ -891,7 +810,7 @@
         </div>
         <div class="education-item animate-on-scroll delay-2">
             <div class="university-badge">
-                 <img src="https://www.zzu.edu.cn/images/dhbanner/logo.png" alt="郑州大学 校徽">
+                 <img src="	https://www.zzu.edu.cn/__local/F/09/A3/7C2002C534020EAD7036D42F848_DB67C5F8_AC59.png" alt="郑州大学 校徽">
             </div>
             <div class="education-info">
                 <h3 class="education-degree">本科：郑州大学 <span class="double-first-class-label">（双一流 211）</span></h3>
@@ -903,7 +822,8 @@
         </div>
     </div>
 
-    <hr class="section-separator"> <div class="achievements-container" id="achievements">
+    <hr class="section-separator">
+    <div class="achievements-container" id="achievements">
          <h2 class="section-title animate-on-scroll">综合素质优异</h2>
          <div class="achievement-content">
              <p class="achievement-text animate-on-scroll delay-1">
@@ -915,14 +835,15 @@
          </div>
     </div>
 
-    <hr class="section-separator"> <div class="skills-container" id="skills">
+    <hr class="section-separator">
+    <div class="skills-container" id="skills">
         <h2 class="section-title animate-on-scroll">技能证书</h2>
         <div class="skills-grid">
             <div class="skill-item-wrapper ielts animate-on-scroll delay-1">
                 <div class="skill-item hover-scale" role="button" tabindex="0" aria-pressed="false" aria-label="雅思证书卡片，点击查看">
                     <div class="skill-item-front">
                         <div class="skill-icon">
-                            <img src="https://placehold.co/60x60/2997ff/ffffff?text=IELTS" alt="IELTS Icon">
+                            <img src="https://placehold.co/60x60/2997ff/ffffff?text=IELTS" alt="雅思图标">
                         </div>
                         <h3 class="skill-title">雅思 (IELTS)</h3>
                         <p class="skill-details">总分: <strong>7.0</strong></p>
@@ -937,7 +858,7 @@
                  <div class="skill-item hover-scale" role="button" tabindex="0" aria-pressed="false" aria-label="初级会计资格证卡片，点击查看">
                     <div class="skill-item-front">
                         <div class="skill-icon">
-                             <img src="https://placehold.co/60x60/34c759/ffffff?text=Cert" alt="Accounting Cert Icon">
+                             <img src="https://placehold.co/60x60/34c759/ffffff?text=Cert" alt="证书图标">
                         </div>
                         <h3 class="skill-title">初级会计资格证</h3>
                         <p class="skill-details">已获得</p>
@@ -952,7 +873,7 @@
                  <div class="skill-item hover-scale" role="button" tabindex="0" aria-pressed="false" aria-label="注册会计师进度卡片，点击查看">
                     <div class="skill-item-front">
                         <div class="skill-icon">
-                             <img src="https://placehold.co/60x60/ff9500/ffffff?text=CPA" alt="CPA Icon">
+                             <img src="https://placehold.co/60x60/ff9500/ffffff?text=CPA" alt="CPA图标">
                         </div>
                         <h3 class="skill-title">注册会计师 (CPA)</h3>
                         <p class="skill-details">已通过: <strong>经济法, 战略</strong></p>
@@ -966,7 +887,8 @@
         </div>
     </div>
 
-    <hr class="section-separator"> <div class="projects-container" id="projects">
+    <hr class="section-separator">
+    <div class="projects-container" id="projects">
         <h2 class="section-title animate-on-scroll">项目经历</h2>
         <div class="projects-list">
             <div class="project-item hover-scale animate-on-scroll delay-1">
@@ -1009,7 +931,7 @@
                         <p><span class="project-label">核心贡献</span>作为<span class="highlight-text project-2">项目负责人</span>负责行业研究 & 商业模式搭建，分析碳市场定价机制、碳资产交易模式、政策影响，提出优化 ESG 治理方案。</p>
                         <p><span class="project-label">最终成果</span>项目方案荣获<strong>国家级三等奖</strong>，在项目中锻炼了能源经济、碳交易市场、可持续投资分析能力。</p>
                     </div>
-                    </div>
+                 </div>
                  <div class="project-results-area">
                     <div class="project-result-image">
                          <img src="https://placehold.co/150x100/eeeeee/777777?text=Project+Visual+2" alt="成果展示2">
@@ -1036,7 +958,7 @@
                      <a href="#" class="project-video-link" target="_blank" rel="noopener noreferrer">
                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M21.582 6.186a2.336 2.336 0 0 0-1.645-1.644C18.32 4 12 4 12 4s-6.32 0-7.937.542A2.336 2.336 0 0 0 2.418 6.186 24.418 24.418 0 0 0 2 12a24.418 24.418 0 0 0 .418 5.814 2.336 2.336 0 0 0 1.645 1.644C5.68 20 12 20 12 20s6.32 0 7.937-.542a2.336 2.336 0 0 0 1.645-1.644A24.418 24.418 0 0 0 22 12a24.418 24.418 0 0 0-.418-5.814zM9.75 15.5V8.5l6 3.5-6 3.5z"></path></svg>
                         查看作品介绍 (B站)
-                     </a>
+                    </a>
                 </div>
                 <div class="project-results-area">
                     <div class="project-result-image">
@@ -1052,47 +974,48 @@
         </div>
     </div>
 
-    <hr class="section-separator"> <div class="internship-container" id="internships">
+    <hr class="section-separator">
+    <div class="internship-container" id="internships">
         <h2 class="section-title animate-on-scroll">实习经历</h2>
-        <div class="internship-timeline"> <div class="timeline-item left animate-on-scroll delay-1"> <div class="timeline-content hover-scale">
-                    <div class="timeline-header">
-                        <h3 class="timeline-company">招商证券股份有限公司</h3>
-                        <h4 class="timeline-role">商业、社服组行研助理</h4>
-                        <span class="timeline-duration">2024.12 - 2025.3</span>
-                    </div>
-                    <div class="timeline-details">
-                        <ul>
-                            <li><span class="highlight-text internship">深度报告</span>: 参与撰写九华旅游、长白山、蜜雪冰城海外、活力天汇、货拉拉、小菜园等深度报告的研究、撰写和修改工作...</li>
-                            <li><strong>消费观点研究:</strong> 参与OTA、本地服务、餐饮、茶饮、酒店、人力资源等行业核心消费观点初稿制作...</li>
-                            <li><strong>业绩点评:</strong> 及时撰写携程、Boss直聘等企业业绩点评 & <span class="highlight-text internship">估值分析</span>...</li>
-                            <li><strong>数据库更新 &数据分析:</strong> ...使用 <span class="highlight-text internship">Python</span> 自动周度生成数据点评...</li>
-                        </ul>
-                    </div>
-                    <p class="timeline-takeaway">工作收获：掌握商社互联网行业研究方法，提高数据挖掘搜集、财务分析、估值建模等能力。</p>
+        <div class="internship-timeline">
+            <div class="timeline-item animate-on-scroll delay-1 hover-scale">
+                <div class="timeline-header">
+                    <h3 class="timeline-company">招商证券股份有限公司</h3>
+                    <h4 class="timeline-role">商业、社服组行研助理</h4>
+                    <span class="timeline-duration">2024.12 - 2025.3</span>
                 </div>
+                <div class="timeline-details">
+                    <ul>
+                        <li><span class="highlight-keyword">深度报告</span>: 参与撰写九华旅游、长白山、蜜雪冰城海外、活力天汇、货拉拉、小菜园等深度报告的研究、撰写和修改工作...</li>
+                        <li><strong>消费观点研究:</strong> 参与OTA、本地服务、餐饮、茶饮、酒店、人力资源等行业核心消费观点初稿制作...</li>
+                        <li><strong>业绩点评:</strong> 及时撰写携程、Boss直聘等企业业绩点评 & <span class="highlight-keyword">估值分析</span>...</li>
+                        <li><strong>数据库更新 &数据分析:</strong> ...使用 <span class="highlight-keyword">Python</span> 自动周度生成数据点评...</li>
+                    </ul>
+                </div>
+                <p class="timeline-takeaway">工作收获：掌握商社互联网行业研究方法，提高数据挖掘搜集、财务分析、估值建模等能力。</p>
             </div>
 
-             <div class="timeline-item right animate-on-scroll delay-1"> <div class="timeline-content hover-scale">
-                     <div class="timeline-header">
-                         <h3 class="timeline-company">容诚会计师事务所（特殊普通合伙）厦门分所</h3>
-                         <h4 class="timeline-role">审计助理</h4>
-                         <span class="timeline-duration">2024.2 - 2024.4</span>
-                     </div>
-                     <div class="timeline-details">
-                         <ul>
-                             <li><strong>实习内容:</strong> 参与某芯片供应商、手术机器人项目<span class="highlight-text internship">IPO审计</span>、某上市公司禽类业务<span class="highlight-text internship">年审</span>。</li>
-                             <li><strong>回函控制与地址核查:</strong> ...使用 <span class="highlight-text internship">VBA</span> 简化回函统计操作...</li>
-                             <li><strong>截止性测试 & 抽凭:</strong> 随机抽取凭证，核验账目记录的准确性和完整性...</li>
-                             <li><strong>银行流水检查:</strong> 查找银行流水并对比公司账目...</li>
-                         </ul>
-                     </div>
-                     <p class="timeline-takeaway">工作收获：熟悉 IPO 和年审审计流程，提升 Excel 数据处理能力，强化财务分析与异常识别能力。</p>
+            <div class="timeline-item animate-on-scroll delay-2 hover-scale">
+                <div class="timeline-header">
+                     <h3 class="timeline-company">容诚会计师事务所（特殊普通合伙）厦门分所</h3>
+                     <h4 class="timeline-role">审计助理</h4>
+                     <span class="timeline-duration">2024.2 - 2024.4</span>
                  </div>
-             </div>
-             </div>
-     </div>
+                 <div class="timeline-details">
+                     <ul>
+                         <li><strong>实习内容:</strong> 参与某芯片供应商、手术机器人项目<span class="highlight-keyword">IPO审计</span>、某上市公司禽类业务<span class="highlight-keyword">年审</span>。</li>
+                         <li><strong>回函控制与地址核查:</strong> ...使用 <span class="highlight-keyword">VBA</span> 简化回函统计操作...</li>
+                         <li><strong>截止性测试 & 抽凭:</strong> 随机抽取凭证，核验账目记录的准确性和完整性...</li>
+                         <li><strong>银行流水检查:</strong> 查找银行流水并对比公司账目...</li>
+                     </ul>
+                 </div>
+                 <p class="timeline-takeaway">工作收获：熟悉 IPO 和年审审计流程，提升 Excel 数据处理能力，强化财务分析与异常识别能力。</p>
+            </div>
+        </div>
+    </div>
 
-     <hr class="section-separator"> <div class="strengths-container" id="strengths">
+     <hr class="section-separator">
+     <div class="strengths-container" id="strengths">
          <div class="strengths-header">
              <h2 class="section-title animate-on-scroll" style="margin-bottom: 0; text-align: left;">个人优势</h2>
              <div class="strengths-scroll-hint">
@@ -1100,7 +1023,8 @@
                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
              </div>
          </div>
-         <div class="strengths-scroll-wrapper-outer"> <div class="strengths-nav-buttons">
+         <div class="strengths-scroll-wrapper-outer">
+            <div class="strengths-nav-buttons">
                  <button id="strength-scroll-left" class="strength-nav-button" aria-label="向左滚动优势卡片">
                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
                  </button>
@@ -1120,7 +1044,7 @@
                      <svg class="strength-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
                      <h3 class="strength-title">数据分析</h3>
                      <p class="strength-description">
-                         熟练运用 <span class="highlight-text data-analysis">Python, VBA, SQL, STATA, Power Query (M)</span> 等工具进行数据挖掘、清洗与分析；能够拆解 <span class="highlight-text data-analysis">GTV/GMV</span> 等运营数据，进行财务分析和估值建模。
+                         熟练运用 <span class="highlight-text data-analysis">Python</span>, <span class="highlight-text data-analysis">VBA</span>, <span class="highlight-text data-analysis">SQL</span>, <span class="highlight-text data-analysis">STATA</span>, <span class="highlight-text data-analysis">Power Query (M)</span> 等工具进行数据挖掘、清洗与分析；能够拆解 GTV/GMV 等运营数据，进行财务分析和估值建模。
                      </p>
                  </div>
                  <div class="strength-card learning animate-on-scroll hover-scale">
@@ -1145,17 +1069,19 @@
                      </p>
                  </div>
                  <div class="strength-card communication animate-on-scroll hover-scale">
-                     <svg class="strength-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 4h16v12H5.17L4 17.17V4m0-2c-1.1 0-2 .9-2 2v15.51l3.07-3.07H20c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2H4zm2 10h8v2H6v-2zm0-3h12v2H6V9zm0-3h12v2H6V6z"/></svg> <h3 class="strength-title">沟通能力</h3>
+                     <svg class="strength-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 4h16v12H5.17L4 17.17V4m0-2c-1.1 0-2 .9-2 2v15.51l3.07-3.07H20c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2H4zm2 10h8v2H6v-2zm0-3h12v2H6V9zm0-3h12v2H6V6z"/></svg>
+                     <h3 class="strength-title">沟通能力</h3>
                      <p class="strength-description">
                          在项目和实习中，能<span class="highlight-text communication">清晰阐述观点</span>，有效进行<span class="highlight-text communication">跨团队沟通与协作</span>，推进项目进展。
                      </p>
                  </div>
              </div>
          </div>
-     </div>
+    </div>
 
 
-     <hr class="section-separator"> <div class="awards-container" id="awards">
+     <hr class="section-separator">
+     <div class="awards-container" id="awards">
          <h2 class="section-title animate-on-scroll">荣誉奖励</h2>
          <p class="awards-intro-text animate-on-scroll delay-1">
              荣获多项国家级、省级及校级荣誉与竞赛奖励。
@@ -1170,12 +1096,13 @@
              <div class="award-photo-item hover-scale animate-on-scroll delay-8"><img src="https://placehold.co/300x400/eeeeee/777777?text=Award+7" alt="荣誉证书7"></div>
              <div class="award-photo-item hover-scale animate-on-scroll delay-1"><img src="https://placehold.co/300x400/eeeeee/777777?text=Award+8" alt="荣誉证书8"></div>
              </div>
-     </div>
+    </div>
 
      <hr class="section-separator">
      <div class="personal-style-container" id="personal-style">
          <h2 class="section-title animate-on-scroll">个人风采</h2>
-         <div class="style-grid"> <div class="style-item animate-on-scroll delay-1 hover-scale">
+         <div class="style-grid">
+            <div class="style-item animate-on-scroll delay-1 hover-scale">
                  <div class="style-image">
                      <img src="https://placehold.co/600x400/5856d6/ffffff?text=Activity+Photo+1" alt="活动照片1">
                  </div>
@@ -1212,10 +1139,11 @@
                  </div>
              </div>
              </div>
-     </div>
+    </div>
 
 
-     <hr class="section-separator"> <div class="portfolio-container" id="portfolio">
+     <hr class="section-separator">
+     <div class="portfolio-container" id="portfolio">
          <h2 class="portfolio-title animate-on-scroll">作品集</h2>
          <p class="portfolio-description animate-on-scroll delay-1">
              查看我的详细作品集，了解更多关于我的项目、分析和成果。
@@ -1223,7 +1151,7 @@
          <a href="#" class="portfolio-button animate-on-scroll delay-2" target="_blank" rel="noopener noreferrer">
              下载作品集 (PDF)
          </a>
-     </div>
+    </div>
 
      <hr class="section-separator">
      <div class="contact-container" id="contact">
@@ -1243,140 +1171,165 @@
          <p class="disclaimer animate-on-scroll delay-3">
              声明：该网站由本人使用AIGC辅助设计搭建，仅用于校招个人风采展示，可作为本人综合能力参考。请勿恶意攻击。
          </p>
-     </div>
+    </div>
 
 
     <script>
+        // 确保DOM完全加载后再执行脚本
         document.addEventListener('DOMContentLoaded', () => {
-            // --- Intersection Observer for Animations ---
+            // --- Intersection Observer API 用于实现滚动动画 ---
+
+            // 主观察器的配置选项
             const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1 // Lower threshold for vertical items
+                root: null, // 相对于视口进行观察
+                rootMargin: '0px', // 无额外边距
+                threshold: 0.1 // 元素10%可见时触发
             };
 
-            // Observer for the horizontal scroll container (Strengths)
-             const horizontalContainerObserverOptions = {
+            // 针对“个人优势”区块的水平滚动容器的观察器配置
+            const horizontalContainerObserverOptions = {
                  root: null,
                  rootMargin: '0px',
-                 threshold: 0.2 // Trigger when 20% of the container is visible
-             };
+                 threshold: 0.2 // 当“个人优势”容器20%可见时触发
+            };
 
+            /**
+             * 主Intersection Observer的回调函数。
+             * 当被观察的元素进入或离开视口时执行。
+             * @param {IntersectionObserverEntry[]} entries - 被观察的元素条目数组。
+             * @param {IntersectionObserver} observerInstance - 调用此回调的观察器实例。
+             */
             const observerCallback = (entries, observerInstance) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        // Unobserve elements that only animate once
+                    if (entry.isIntersecting) { // 如果元素进入视口
+                        entry.target.classList.add('is-visible'); // 添加 'is-visible' 类以触发动画
+                        // 对于只需要播放一次动画的元素，在动画触发后停止观察，以优化性能。
+                        // 注意：不停止观察 'strengths-container' 和 'strength-card'，因为它们可能有特殊的观察逻辑（尽管目前也是一次性动画）。
                          if (!entry.target.classList.contains('strengths-container') && !entry.target.classList.contains('strength-card')) {
                              observerInstance.unobserve(entry.target);
                          }
                     }
-                     // Don't remove class for vertical scroll items
+                    // 当前设计：元素离开视口时，'is-visible' 类不会被移除，因此动画只播放一次。
                 });
             };
 
+            /**
+             * “个人优势”区块容器的Intersection Observer回调函数。
+             * 当“个人优势”容器进入视口时，开始观察其内部的各个优势卡片。
+             * @param {IntersectionObserverEntry[]} entries - 被观察的元素条目数组。
+             * @param {IntersectionObserver} observer - 调用此回调的观察器实例。
+             */
              const horizontalContainerCallback = (entries, observer) => {
                  entries.forEach(entry => {
-                     if (entry.isIntersecting) {
-                         // Container is visible, start observing individual cards
+                     if (entry.isIntersecting) { // 如果“个人优势”容器进入视口
+                         // 获取容器内所有的优势卡片
                          const strengthCards = entry.target.querySelectorAll('.strength-card');
                          strengthCards.forEach(card => {
-                             // Use the main observer to trigger individual card animations
+                             // 使用主观察器来观察单个优势卡片，以触发它们的入场动画
                              mainObserver.observe(card);
                          });
-                         // Stop observing the container itself
+                         // 容器本身的任务完成（即启动对子元素的观察），停止观察容器本身。
                          observer.unobserve(entry.target);
                      }
                  });
              };
 
-
+            // 创建Intersection Observer实例
             const mainObserver = new IntersectionObserver(observerCallback, observerOptions);
             const horizontalContainerObserver = new IntersectionObserver(horizontalContainerCallback, horizontalContainerObserverOptions);
 
-
-            // Observe standard elements
+            //选取所有需要滚动动画的元素
             const elementsToAnimate = document.querySelectorAll(
-                '.animate-on-scroll, .section-title, .education-item, .achievement-text, .achievement-image-placeholder, .skill-item-wrapper, .project-item, .project-result-image, .timeline-item, .award-photo-item, .awards-intro-text, .style-item, .style-image, .style-text, .portfolio-title, .portfolio-description, .portfolio-button, .contact-title, .contact-item, .disclaimer' // Added disclaimer
+                '.animate-on-scroll, .section-title, .education-item, .achievement-text, .achievement-image-placeholder, .skill-item-wrapper, .project-item, .project-result-image, .timeline-item, .award-photo-item, .awards-intro-text, .style-item, .style-image, .style-text, .portfolio-title, .portfolio-description, .portfolio-button, .contact-title, .contact-item, .disclaimer'
             );
+            // 对每个选取的元素启动观察
             elementsToAnimate.forEach(el => {
                  mainObserver.observe(el);
             });
 
-            // Observe the strengths container to trigger card observation
+            // 观察“个人优势”区块的容器，以便在其可见时开始观察内部卡片
              const strengthsContainer = document.querySelector('.strengths-container');
              if (strengthsContainer) {
                  horizontalContainerObserver.observe(strengthsContainer);
              }
 
 
-            // --- Skill Card Flip on Click ---
+            // --- 技能卡片点击翻转功能 ---
+            // 为每个技能卡片添加点击事件和键盘事件（Enter/Space）监听器，以切换翻转动画。
             const skillItems = document.querySelectorAll('.skill-item');
             skillItems.forEach(item => {
                 item.addEventListener('click', () => {
-                    const isFlipped = item.classList.toggle('is-flipped');
-                    item.setAttribute('aria-pressed', isFlipped);
+                    const isFlipped = item.classList.toggle('is-flipped'); // 切换 'is-flipped' 类
+                    item.setAttribute('aria-pressed', isFlipped); // 更新ARIA属性，增强可访问性
                 });
                 item.addEventListener('keydown', (event) => {
-                    if (event.key === 'Enter' || event.key === ' ') {
-                        event.preventDefault();
+                    if (event.key === 'Enter' || event.key === ' ') { // 如果按下Enter或空格键
+                        event.preventDefault(); // 阻止默认行为（如空格键滚动页面）
                         const isFlipped = item.classList.toggle('is-flipped');
                         item.setAttribute('aria-pressed', isFlipped);
                     }
                 });
             });
 
-            // --- Strengths Horizontal Scroll Buttons ---
-            const scrollWrapper = document.getElementById('strengths-scroller');
-            const scrollLeftButton = document.getElementById('strength-scroll-left');
-            const scrollRightButton = document.getElementById('strength-scroll-right');
+            // --- “个人优势”区块水平滚动按钮功能 ---
+            // 管理“个人优势”卡片轮播的左右滚动按钮的功能。
+            const scrollWrapper = document.getElementById('strengths-scroller'); // 滚动容器
+            const scrollLeftButton = document.getElementById('strength-scroll-left'); // 左滚动按钮
+            const scrollRightButton = document.getElementById('strength-scroll-right'); // 右滚动按钮
 
             if (scrollWrapper && scrollLeftButton && scrollRightButton) {
-                const scrollAmount = 300; // Adjust scroll amount as needed
+                const scrollAmount = 300; // 每次点击按钮滚动的像素值
 
+                // 更新滚动按钮的禁用状态（例如，滚动到最左侧时禁用左按钮）
                 const updateButtonState = () => {
                     scrollLeftButton.classList.toggle('disabled', scrollWrapper.scrollLeft <= 0);
+                    // 检查是否滚动到底部（允许5px的误差）
                     scrollRightButton.classList.toggle('disabled', scrollWrapper.scrollLeft + scrollWrapper.clientWidth >= scrollWrapper.scrollWidth - 5);
                 };
 
+                // 左滚动按钮点击事件
                 scrollLeftButton.addEventListener('click', () => {
-                    scrollWrapper.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                    scrollWrapper.scrollBy({ left: -scrollAmount, behavior: 'smooth' }); // 平滑向左滚动
                 });
 
+                // 右滚动按钮点击事件
                 scrollRightButton.addEventListener('click', () => {
-                    scrollWrapper.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                    scrollWrapper.scrollBy({ left: scrollAmount, behavior: 'smooth' }); // 平滑向右滚动
                 });
 
+                // 监听滚动容器的滚动事件，以便动态更新按钮状态
                 scrollWrapper.addEventListener('scroll', updateButtonState);
-                updateButtonState(); // Initial check
+                // 页面加载时立即检查并更新一次按钮状态
+                updateButtonState();
             }
 
-             // --- Copy to Clipboard Function ---
+             // --- 复制到剪贴板功能 ---
+             // 将提供的文本复制到剪贴板，并在点击的元素上显示一个提示信息。
              window.copyToClipboard = (text, element) => {
-                 navigator.clipboard.writeText(text).then(() => {
-                     const tooltip = element.querySelector('.copy-tooltip');
+                 navigator.clipboard.writeText(text).then(() => { // 尝试写入剪贴板
+                     const tooltip = element.querySelector('.copy-tooltip'); // 获取该元素下的提示框
                      if (tooltip) {
-                         tooltip.textContent = '已复制!';
-                         tooltip.classList.add('visible');
+                         tooltip.textContent = '已复制!'; // 显示“已复制!”
+                         tooltip.classList.add('visible'); // 使提示框可见
+                         // 1.5秒后隐藏提示框并重置文本
                          setTimeout(() => {
                              tooltip.classList.remove('visible');
-                             tooltip.textContent = '点击复制'; // Reset text
-                         }, 1500); // Hide after 1.5 seconds
+                             tooltip.textContent = '点击复制'; // 重置为初始文本
+                         }, 1500);
                      }
-                 }).catch(err => {
-                     console.error('无法复制: ', err);
+                 }).catch(err => { // 如果复制失败
+                     console.error('无法复制: ', err); // 在控制台打印错误
                      const tooltip = element.querySelector('.copy-tooltip');
                      if (tooltip) {
-                         tooltip.textContent = '复制失败';
+                         tooltip.textContent = '复制失败'; // 显示“复制失败”
                           tooltip.classList.add('visible');
                           setTimeout(() => {
                              tooltip.classList.remove('visible');
-                             tooltip.textContent = '点击复制'; // Reset text
+                             tooltip.textContent = '点击复制'; // 重置为初始文本
                          }, 1500);
                      }
                  });
              }
-
         });
     </script>
 
