@@ -477,7 +477,7 @@
             /* Animation */
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
         }
         /* Apply distinct styles to cards */
         .strength-card.teamwork { border-left: 5px solid var(--apple-pink); }
@@ -492,12 +492,12 @@
             transform: translateY(0);
         }
         /* Apply sequential delays based on card order */
-        .strength-card:nth-child(1) { transition-delay: 0.1s; }
-        .strength-card:nth-child(2) { transition-delay: 0.2s; }
-        .strength-card:nth-child(3) { transition-delay: 0.3s; }
-        .strength-card:nth-child(4) { transition-delay: 0.4s; }
-        .strength-card:nth-child(5) { transition-delay: 0.5s; }
-        .strength-card:nth-child(6) { transition-delay: 0.6s; } /* Added for communication */
+        .strength-card:nth-child(1) { transition-delay: 0.05s; }
+        .strength-card:nth-child(2) { transition-delay: 0.1s; }
+        .strength-card:nth-child(3) { transition-delay: 0.15s; }
+        .strength-card:nth-child(4) { transition-delay: 0.2s; }
+        .strength-card:nth-child(5) { transition-delay: 0.25s; }
+        .strength-card:nth-child(6) { transition-delay: 0.3s; } /* Added for communication */
 
 
         .strength-icon {
@@ -778,19 +778,20 @@
              .project-label { font-size: 0.75rem; }
               .project-video-link { margin-top: 15px; padding: 7px 12px; font-size: 0.8rem; }
 
-              /* Internship Section Mobile */
-              .internship-container { padding: 60px 5% 50px; }
-              /* Make timeline vertical on mobile */
-              .internship-timeline::after { left: 15px; margin-left: 0; } /* Position line to the left */
-              .timeline-item { width: 100%; padding-left: 50px; padding-right: 10px; /* Adjust padding */ }
-              .timeline-item.left, .timeline-item.right { left: 0; } /* Reset horizontal positioning */
-              .timeline-item::after { left: 6px; /* Position circle relative to the left line */ } /* Adjust circle position */
-              .timeline-item.left .timeline-content, .timeline-item.right .timeline-content { text-align: left; } /* Always left align content */
-              .timeline-company { font-size: 1.3rem; }
-              .timeline-role { font-size: 0.95rem; }
-              .timeline-duration { font-size: 0.8rem; }
-              .timeline-details li { font-size: 0.85rem; }
-              .timeline-takeaway { font-size: 0.8rem; }
+            .internship-container { padding: 60px 5% 50px; }
+            .internship-timeline::after { left: 15px; margin-left: 0; }
+            .timeline-item { width: 100%; padding: 15px 15px 15px 40px; margin-bottom: 25px; }
+            .timeline-item:last-child { margin-bottom: 0; }
+            .timeline-item.left, .timeline-item.right { left: 0; }
+            .timeline-item::after { left: 6px; top: 30px; }
+            .timeline-item.left .timeline-content, .timeline-item.right .timeline-content { text-align: left; }
+            .timeline-item .timeline-content { padding: 20px; border-radius: 12px; }
+            .timeline-company { font-size: 1.3rem; }
+            .timeline-role { font-size: 0.95rem; }
+            .timeline-duration { font-size: 0.8rem; }
+            .timeline-details li { font-size: 0.85rem; }
+            .timeline-takeaway { font-size: 0.8rem; }
+              
 
               /* Strengths Section Mobile */
               .strengths-container { padding: 60px 0 50px 0; }
@@ -1226,7 +1227,7 @@
 
      <hr class="section-separator">
      <div class="contact-container" id="contact">
-         <h2 class="contact-title animate-on-scroll">联系方式（点击复制）</h2>
+         <h2 class="contact-title animate-on-scroll">联系方式（）</h2>
          <div class="contact-details">
              <div class="contact-item animate-on-scroll delay-1" onclick="copyToClipboard('18268757436', this)">
                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
