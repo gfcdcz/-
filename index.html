@@ -225,8 +225,18 @@
             transform-style: preserve-3d; /* 开启3D变换 */
             transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); /* 翻转动画 */
             cursor: pointer; border: 1px solid var(--card-border); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            /* 应用扭动动画 */
+            animation: none; /* 初始无动画 */
         }
-        .skill-item.is-flipped { transform: rotateY(180deg); } /* 翻转状态 */
+        /* 当容器可见时，为内部的 .skill-item 应用扭动动画 */
+        .skill-item-wrapper.is-visible .skill-item {
+            /* 动画名称 时长 缓动函数 延迟 次数 */
+            animation: wiggle 0.7s ease-in-out 0.8s 2;
+        }
+        .skill-item.is-flipped {
+            transform: rotateY(180deg);
+            animation: none; /* 翻转后停止扭动动画 */
+        }
         .skill-item-front, .skill-item-back { /* 卡片正面与背面 */
             position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden;
             backface-visibility: hidden; /* 隐藏背面 */
@@ -253,7 +263,28 @@
         .skill-title { font-size: 1.3rem; font-weight: 600; color: var(--apple-light); margin: 0; }
         .skill-details { font-size: 0.95rem; color: var(--apple-gray); line-height: 1.5; margin: 0; }
         .skill-details strong { color: var(--apple-light); font-weight: 500; }
-        .skill-hint { font-size: 0.75rem; color: var(--apple-gray); margin-top: 10px; position: absolute; bottom: 15px; left: 0; right: 0; text-align: center; }
+        .skill-hint {
+            font-size: 0.75rem;
+            color: var(--apple-gray);
+            margin-top: 10px;
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            /* 应用发光动画 */
+            animation: none; /* 初始无动画 */
+        }
+        /* 当卡片容器可见时，为提示文字应用发光动画 */
+        .skill-item-wrapper.is-visible .skill-hint {
+            animation: glow-hint 1.5s ease-in-out 1s infinite alternate;
+        }
+        /* 卡片翻转后，停止提示文字的动画 */
+        .skill-item.is-flipped .skill-hint {
+            animation: none;
+            opacity: 1; /* 确保文字可见 */
+        }
+
 
          /* --- 项目经历区块 --- */
         .projects-container { padding: 100px 10% 80px; position: relative; overflow: hidden; background-color: var(--section-bg-alt); }
@@ -771,6 +802,18 @@
              0%, 100% { transform: translateX(0); }
              50% { transform: translateX(5px); }
         }
+        /* 技能卡片扭动动画 */
+        @keyframes wiggle {
+            0%, 100% { transform: rotateY(0deg); }
+            25% { transform: rotateY(-4deg); }
+            50% { transform: rotateY(4deg); }
+            75% { transform: rotateY(-2deg); }
+        }
+        /* 技能卡片提示文字发光动画 */
+        @keyframes glow-hint {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
 
     </style>
 </head>
@@ -910,12 +953,12 @@
                 </div>
                 <div class="project-results-area">
                      <div class="project-result-image">
-                         <img src="https://placehold.co/150x100/eeeeee/777777?text=Project+Visual+1" alt="成果展示1">
-                         <span>成果展示</span>
+                         <img src="https://myresume-sdk.oss-cn-chengdu.aliyuncs.com/%E6%9C%8D%E5%8A%A1%E5%A4%96%E5%8C%8523.jpg?Expires=1746703194&OSSAccessKeyId=TMP.3Kn9HJ9DQbvyUXS2MFcVpMcN4HWSiHjpELcW1GhDqC1f8kYB6XtS8kiCKhRryZLRf15DS2EfgXp89rtWttnjA4Wi8QRFkh&Signature=Nu%2Bl851pLxAR%2B5%2BVrVD%2FmBAM6L8%3D" alt="获奖证书">
+                         <span>获奖证书</span>
                      </div>
                      <div class="project-result-image">
-                         <img src="https://placehold.co/150x200/eeeeee/777777?text=Certificate+1" alt="获奖证书1">
-                         <span>获奖证书</span>
+                         <img src="https://placehold.co/150x200/eeeeee/777777?text=Certificate+1" alt="成果展示">
+                         <span>成果展示</span>
                      </div>
                 </div>
             </div>
@@ -987,12 +1030,12 @@
                 <div class="timeline-details">
                     <ul>
                         <li><span class="highlight-keyword">深度报告</span>: 参与撰写九华旅游、长白山、蜜雪冰城海外、活力天汇、货拉拉、小菜园等深度报告的研究、撰写和修改工作...</li>
-                        <li><strong>消费观点研究:</strong> 参与OTA、本地服务、餐饮、茶饮、酒店、人力资源等行业核心消费观点初稿制作，完善路演 PPT，搜集整理社服、商业、互联网企业数据，分析行业动态、AI 赋能情况。</li>
-                        <li><strong>业绩点评:</strong> 及时撰写携程、Boss直聘等企业 & <span class="highlight-keyword">业绩点评 & 估值分析</span>，解读财务指标、盈利能力及投资建议</li>
-                        <li><strong>数据库更新 &数据分析:</strong> 负责交运、酒店行业数据库更新，独立分析春运数据及影响，使用 <span class="highlight-keyword">Python</span> 自动周度生成数据点评，减少重复性工作，提升工作效率。</li>
+                        <li><strong>消费观点研究:</strong> 参与OTA、本地服务、餐饮、茶饮、酒店、人力资源等行业核心消费观点初稿制作...</li>
+                        <li><strong>业绩点评:</strong> 及时撰写携程、Boss直聘等企业业绩点评 & <span class="highlight-keyword">估值分析</span>...</li>
+                        <li><strong>数据库更新 &数据分析:</strong> ...使用 <span class="highlight-keyword">Python</span> 自动周度生成数据点评...</li>
                     </ul>
                 </div>
-                <p class="timeline-takeaway">掌握商社互联网行业研究方法，提高数据挖掘搜集（借助爬虫、AIGC、金融终端等工具）、财务分析、估值建模、商业模式以及行业分析等能力。</p>
+                <p class="timeline-takeaway">工作收获：掌握商社互联网行业研究方法，提高数据挖掘搜集、财务分析、估值建模等能力。</p>
             </div>
 
             <div class="timeline-item animate-on-scroll delay-2 hover-scale">
@@ -1004,9 +1047,9 @@
                  <div class="timeline-details">
                      <ul>
                          <li><strong>实习内容:</strong> 参与某芯片供应商、手术机器人项目<span class="highlight-keyword">IPO审计</span>、某上市公司禽类业务<span class="highlight-keyword">年审</span>。</li>
-                         <li><strong>回函控制与地址核查:</strong> 负责回函统计录入和回函地址核查，填写回函差异解释表，使用 <span class="highlight-keyword">VBA</span> 简化回函统计操作，提升工作效率。 </li>
-                         <li><strong>截止性测试 & 抽凭:</strong> 随机抽取凭证，核验账目记录的准确性和完整性，并检查是否存在跨期及调整情况。</li>
-                         <li><strong>银行流水检查:</strong> 查找银行流水并对比公司账目，确保交易真实性和资金流向准确。</li>
+                         <li><strong>回函控制与地址核查:</strong> ...使用 <span class="highlight-keyword">VBA</span> 简化回函统计操作...</li>
+                         <li><strong>截止性测试 & 抽凭:</strong> 随机抽取凭证，核验账目记录的准确性和完整性...</li>
+                         <li><strong>银行流水检查:</strong> 查找银行流水并对比公司账目...</li>
                      </ul>
                  </div>
                  <p class="timeline-takeaway">工作收获：熟悉 IPO 和年审审计流程，提升 Excel 数据处理能力，强化财务分析与异常识别能力。</p>
